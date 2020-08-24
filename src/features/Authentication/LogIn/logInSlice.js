@@ -7,7 +7,7 @@ export const authSlice = createSlice({
     me: {},
   },
   reducers: {
-    setUserToken(state, action) {
+    setUserToken(state) {
       return { ...state, userToken: 'gggggg' };
     },
   },

@@ -13,10 +13,13 @@ import store from './store';
 import { Provider } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 
-import OnBoardingScreen from './features/OnBoarding';
-import LogInScreen from './features/LogIn';
+import OnBoardingScreen from './features/Authentication/OnBoarding';
+import LogInScreen from './features/Authentication/LogIn';
+import SignUpScreen from './features/Authentication/SignUp';
+import ForgotPasswrodScreen from './features/Authentication/ForgotPassword';
+
 import HomeScreen from './features/Home';
 
 const Stack = createStackNavigator();
@@ -24,11 +27,28 @@ const Stack = createStackNavigator();
 function StackNavigator() {
   const userToken = useSelector((state) => state.auth.userToken);
   return (
-    <Stack.Navigator initialRouteName="OnBoarding" headerMode="none">
+    <Stack.Navigator
+      initialRouteName="OnBoarding"
+      mode="card"
+      headerMode="none">
       {userToken === null ? (
         <>
-          <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
+          <Stack.Screen
+            name="OnBoarding"
+            component={OnBoardingScreen}
+            options={{
+              transitionSpec: {
+                open: TransitionSpecs.TransitionIOSSpec,
+                close: TransitionSpecs.TransitionIOSSpec,
+              },
+            }}
+          />
           <Stack.Screen name="LogIn" component={LogInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswrodScreen}
+          />
         </>
       ) : (
         <Stack.Screen name="Home" component={HomeScreen} />

@@ -96,6 +96,21 @@ export default configureStore({
 
 ## src/index.js
 
+```js
+import React from 'react';
+import App from './App';
+import store from './store';
+import { Provider } from 'react-redux';
+
+export default = () => {
+  return (
+     <Provider store={store}>
+        <App />
+     </Provider>
+  )
+}
+```
+
 # React Navigation
 
 ## install
