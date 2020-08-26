@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, SafeAreaView, Text, View, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 
 // import { setUserToken } from './logInSlice';
-import { onFacebookButtonPress } from '~/services/Authentication';
+import { GoogleSignin } from '@react-native-community/google-signin';
+import {
+  onFacebookButtonPress,
+  onGoogleButtonPress,
+} from '~/services/Authentication';
 
 import LoginButton from '~/components/LoginButton';
 
@@ -12,19 +16,19 @@ LogInScreen.propTypes = {
 };
 
 export default function LogInScreen() {
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '288981239410-78k5bk1ue8eru4dkhj05dasv7mkm2njv.apps.googleusercontent.com',
+    });
+  }, []);
+
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <View style={{ flex: 1, padding: 15 }}>
+        <View style={{ flex: 1, padding: 30 }}>
           <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Text
-              style={{
-                fontSize: 30,
-                marginBottom: 30,
-                textAlign: 'center',
-              }}>
-              환영합니다 :)
-            </Text>
+            <Text style={styles.title}>KCTV</Text>
             <LoginButton
               backgroudColor={'#FFE502'}
               fontColor={'#111'}
@@ -53,8 +57,8 @@ export default function LogInScreen() {
               title={'구글로 시작하기'}
               style={{ borderWidth: 1, borderColor: '#e5e5e5' }}
               onPress={async () =>
-                await onFacebookButtonPress().then(() =>
-                  console.log('Signed in with Facebook!'),
+                await onGoogleButtonPress().then(() =>
+                  console.log('Signed in with Google!'),
                 )
               }
             />
@@ -68,5 +72,12 @@ export default function LogInScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  title: {
+    color: '#0092DA',
+    fontSize: 40,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    textAlign: 'center',
   },
 });
