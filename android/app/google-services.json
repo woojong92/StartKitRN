@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "288981239410",
+    "firebase_url": "https://startkitrn.firebaseio.com",
+    "project_id": "startkitrn",
+    "storage_bucket": "startkitrn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288981239410:android:b2cce8466d7e3e7269a4eb",
+        "android_client_info": {
+          "package_name": "com.startkitrn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288981239410-78k5bk1ue8eru4dkhj05dasv7mkm2njv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKuPM7h1Y7piBRZPohUXGx7rXZaDUdFcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288981239410-78k5bk1ue8eru4dkhj05dasv7mkm2njv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "288981239410-g3qt15tusqs7gact8cpl7e8df17k50ub.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.biskit.StartKitRN"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
