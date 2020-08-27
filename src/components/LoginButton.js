@@ -27,12 +27,12 @@ export default function LoginButton({
         style,
         {
           width: '100%',
-          height: 60,
+          height: 50,
           backgroundColor: `${backgroudColor}`,
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: 4,
-          marginBottom: 15,
+          marginVertical: 10,
         },
       ]}
       onPress={onPress}>
