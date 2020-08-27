@@ -7,6 +7,8 @@ import {
   TextInput,
   Button,
   Alert,
+  TouchableNativeFeedback,
+  Platform,
 } from 'react-native';
 
 const Input = ({ placeholder, value, setValue }) => {
@@ -28,6 +30,14 @@ const Input = ({ placeholder, value, setValue }) => {
   );
 };
 
+import { NextButton } from '../../../components/Authentication/NextButton';
+import {
+  AuthenticationLayout,
+  AuthenticationTitle,
+  AuthenticationSubTitle,
+  AuthenticationTitleContainer,
+} from '../../../components/Authentication/AuthenticationLayout';
+
 export default function SignUpScreen() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -37,10 +47,16 @@ export default function SignUpScreen() {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <View style={{ flex: 1, padding: 30 }}>
-          <Text style={{ fontSize: 30, marginBottom: 40, fontWeight: 'bold' }}>
-            필수 정보 입력
-          </Text>
+        <AuthenticationLayout>
+          <AuthenticationTitleContainer>
+            <AuthenticationTitle style={{ marginBottom: 10 }}>
+              필수 정보 입력
+            </AuthenticationTitle>
+            <AuthenticationSubTitle>
+              더 많은 혜택을 위한 추가 정보 입력페이지입니다.
+            </AuthenticationSubTitle>
+          </AuthenticationTitleContainer>
+
           <Input placeholder="이메일" setValue={setEmail} value={email} />
           <Input placeholder="이름" setValue={setName} value={name} />
           <Input
@@ -49,9 +65,26 @@ export default function SignUpScreen() {
             value={birth}
           />
           <Input placeholder="성별" setValue={setGender} value={gender} />
-          <Button title="다음" onPress={() => Alert.alert('다음')} />
-        </View>
+        </AuthenticationLayout>
       </SafeAreaView>
+
+      <View style={{ flexDirection: 'row' }}>
+        <TouchableNativeFeedback onPress={() => Alert.alert('나중에 입력하기')}>
+          <View
+            style={{
+              width: '50%',
+              height: Platform.OS === 'ios' ? 80 : 60,
+              backgroundColor: '#D7D7D7',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>
+              나중에 입력하기
+            </Text>
+          </View>
+        </TouchableNativeFeedback>
+        <NextButton width={'50%'} onPress={() => Alert.alert('gg')} />
+      </View>
     </>
   );
 }
