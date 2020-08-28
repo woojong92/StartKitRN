@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Theme from '../../theme';
 
 export const AuthenticationLayout = styled.View`
   flex: 1;
@@ -10,13 +11,13 @@ export const AuthenticationTitleContainer = styled.View`
 `;
 
 export const AuthenticationTitle = styled.Text`
-  color: ${(props) => props.color || '#111'};
+  color: ${(props) => props.color || Theme.colors.black};
   font-size: 30px;
   text-align: left;
   font-weight: bold;
 `;
 
 export const AuthenticationSubTitle = styled.Text`
-  color: #111;
+  color: ${Theme.colors.black};
   font-size: 15;
 `;

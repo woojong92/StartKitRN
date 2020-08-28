@@ -37,8 +37,11 @@ import {
   AuthenticationSubTitle,
   AuthenticationTitleContainer,
 } from '../../../components/Authentication/AuthenticationLayout';
+import { useTheme } from '@react-navigation/native';
 
 export default function SignUpScreen() {
+  const { colors } = useTheme();
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
@@ -74,11 +77,12 @@ export default function SignUpScreen() {
             style={{
               width: '50%',
               height: Platform.OS === 'ios' ? 80 : 60,
-              backgroundColor: '#D7D7D7',
+              backgroundColor: colors.gray,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>
+            <Text
+              style={{ fontSize: 20, color: colors.white, fontWeight: 'bold' }}>
               나중에 입력하기
             </Text>
           </View>

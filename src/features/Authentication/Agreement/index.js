@@ -13,6 +13,16 @@ AgreementScreen.propTypes = {
 };
 
 import CheckBoxItem from './CheckBoxItem';
+import Theme from '../../../theme';
+import styled from '@emotion/native';
+
+const Diver = styled.View`
+  width: 100%;
+  height: 1;
+  border-bottom-color: ${Theme.colors.gray};
+  border-bottom-width: 1;
+  margin-vertical: 10px;
+`;
 
 export default function AgreementScreen({ navigation }) {
   const [totalToggleCheckBox, setTotalToggleCheckBox] = useState(false);
@@ -51,7 +61,7 @@ export default function AgreementScreen({ navigation }) {
               </CheckBoxItem>
             </View>
 
-            <View style={styles.diver} />
+            <Diver />
 
             <CheckBoxItem value={toggleCheckBox1} setValue={setToggleCheckBox1}>
               서비스 이용약관 동의 (필수)
@@ -84,12 +94,5 @@ export default function AgreementScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  diver: {
-    width: '100%',
-    height: 1,
-    borderBottomColor: '#ABABAB',
-    borderBottomWidth: 1,
-    marginVertical: 10,
   },
 });

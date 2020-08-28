@@ -30,6 +30,15 @@ import {
   AuthenticationLayout,
 } from '../../../components/Authentication/AuthenticationLayout';
 
+import { useTheme } from '@react-navigation/native';
+
+const SNSColors = {
+  kakao: '#FFE502',
+  naver: '#1FC800',
+  facebook: '#1A76F2',
+  google: '#FFFFFF',
+};
+
 export default function LogInScreen({ navigation }) {
   useEffect(() => {
     GoogleSignin.configure({
@@ -38,15 +47,19 @@ export default function LogInScreen({ navigation }) {
     });
   }, []);
 
+  const { colors } = useTheme();
+
   return (
     <>
       <SafeAreaView style={styles.container}>
         <AuthenticationLayout>
           <AuthenticationTitleContainer>
-            <AuthenticationTitle color={'#0092DA'}>
+            <AuthenticationTitle color={colors.black}>
               WAKE UP에
             </AuthenticationTitle>
-            <AuthenticationTitle color={'#0092DA'} style={{ marginBottom: 10 }}>
+            <AuthenticationTitle
+              color={colors.black}
+              style={{ marginBottom: 10 }}>
               오신 것을 환영합니다.
             </AuthenticationTitle>
             <AuthenticationSubTitle>
@@ -56,20 +69,20 @@ export default function LogInScreen({ navigation }) {
 
           <View style={{ marginTop: 10 }}>
             <LoginButton
-              backgroudColor={'#FFE502'}
-              fontColor={'#111'}
+              backgroudColor={SNSColors.kakao}
+              fontColor={colors.black}
               title={'카카오톡으로 시작하기'}
               onPress={() => Alert.alert('카카오톡 로그인')}
             />
             <LoginButton
-              backgroudColor={'#1FC800'}
-              fontColor={'#fff'}
+              backgroudColor={SNSColors.naver}
+              fontColor={colors.white}
               title={'네이버로 시작하기'}
               onPress={() => Alert.alert('네이버 로그인')}
             />
             <LoginButton
-              backgroudColor={'#1A76F2'}
-              fontColor={'#fff'}
+              backgroudColor={SNSColors.facebook}
+              fontColor={colors.white}
               title={'페이스북으로 시작하기'}
               onPress={async () =>
                 await onFacebookButtonPress().then(() =>
@@ -78,10 +91,10 @@ export default function LogInScreen({ navigation }) {
               }
             />
             <LoginButton
-              backgroudColor={'#FFFFFF'}
-              fontColor={'#111'}
+              backgroudColor={SNSColors.google}
+              fontColor={colors.black}
               title={'구글로 시작하기'}
-              style={{ borderWidth: 1, borderColor: '#e5e5e5' }}
+              style={{ borderWidth: 1, borderColor: colors.gray }}
               onPress={async () =>
                 await onGoogleButtonPress().then(() =>
                   console.log('Signed in with Google!'),
@@ -103,7 +116,7 @@ export default function LogInScreen({ navigation }) {
                   width: windowWidth / 2 - 40,
                   border: 0,
                   borderBottomWidth: 1,
-                  borderBottomColor: '#C0C0C0',
+                  borderBottomColor: colors.gray,
                 }}
               />
               <View style={{ marginHorizontal: 10 }}>
@@ -115,16 +128,16 @@ export default function LogInScreen({ navigation }) {
                   width: windowWidth / 2 - 40,
                   border: 0,
                   borderBottomWidth: 1,
-                  borderBottomColor: '#C0C0C0',
+                  borderBottomColor: colors.gray,
                 }}
               />
             </View>
 
             <LoginButton
-              backgroudColor={'#FFFFFF'}
-              fontColor={'#111'}
+              backgroudColor={colors.white}
+              fontColor={colors.black}
               title={'이메일로 계속하기'}
-              style={{ borderWidth: 1, borderColor: '#e5e5e5' }}
+              style={{ borderWidth: 1, borderColor: colors.gray }}
               onPress={() => navigation.push('Agreement')}
             />
           </View>
@@ -137,15 +150,5 @@ export default function LogInScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  title: {
-    color: '#0092DA',
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'left',
-  },
-  subTitle: {
-    color: 'black',
-    fontSize: 18,
   },
 });
