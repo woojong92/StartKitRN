@@ -2,6 +2,43 @@ import auth from '@react-native-firebase/auth';
 
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin } from '@react-native-community/google-signin';
+import KakaoLogins, { KAKAO_AUTH_TYPES } from '@react-native-seoul/kakao-login';
+
+// const logCallback = (log, callback) => {
+//   console.log(log);
+//   callback;
+// };
+
+export async function onKakaoButtonPress() {
+  console.log('push kakao');
+  try {
+    const result = await KakaoLogins.login([
+      KAKAO_AUTH_TYPES.Talk,
+      KAKAO_AUTH_TYPES.Account,
+    ]);
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// .then(result => {
+//   setToken(result.accessToken);
+//   logCallback(
+//     `Login Finished:${JSON.stringify(result)}`,
+//     setLoginLoading(false),
+//   );
+// })
+// .catch(err => {
+//   if (err.code === 'E_CANCELLED_OPERATION') {
+//     logCallback(`Login Cancelled:${err.message}`, setLoginLoading(false));
+//   } else {
+//     logCallback(
+//       `Login Failed:${err.code} ${err.message}`,
+//       setLoginLoading(false),
+//     );
+//   }
+// });
 
 export async function onFacebookButtonPress() {
   // Attempt login with permissions
