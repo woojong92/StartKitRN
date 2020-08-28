@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-
-import { View, Text } from 'react-native';
-
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -35,10 +32,12 @@ function StackNavigator() {
   );
 }
 
+import Theme from './theme';
+
 function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer theme={Theme}>
         <StackNavigator />
       </NavigationContainer>
     </Provider>
