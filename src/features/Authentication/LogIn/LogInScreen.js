@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  View,
-  Alert,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 
 const windowWidth = Dimensions.get('window').width;
@@ -16,6 +9,7 @@ import {
   onFacebookButtonPress,
   onGoogleButtonPress,
   onKakaoButtonPress,
+  onNaverButtonPress,
 } from '~/services/Authentication';
 
 import LoginButton from '~/components/Authentication/LoginButton';
@@ -83,7 +77,11 @@ export default function LogInScreen({ navigation }) {
               backgroudColor={SNSColors.naver}
               fontColor={colors.white}
               title={'네이버로 시작하기'}
-              onPress={() => Alert.alert('네이버 로그인')}
+              onPress={async () =>
+                await onNaverButtonPress().then(() =>
+                  console.log('naver login success!'),
+                )
+              }
             />
             <LoginButton
               backgroudColor={SNSColors.facebook}
