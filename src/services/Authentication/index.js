@@ -1,13 +1,44 @@
 import auth from '@react-native-firebase/auth';
-
+import { Platform } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import KakaoLogins, { KAKAO_AUTH_TYPES } from '@react-native-seoul/kakao-login';
+
+import { NaverLogin, getProfile } from '@react-native-seoul/naver-login';
 
 // const logCallback = (log, callback) => {
 //   console.log(log);
 //   callback;
 // };
+
+const iosKeys = {
+  kConsumerKey: 'f0ZEoyHAvSRdbFOM5F3K',
+  kConsumerSecret: 'OFsa8i2gAr',
+  kServiceAppName: 'StartKitRN',
+  kServiceAppUrlScheme: 'naverlogin', // only for iOS
+};
+
+const androidKeys = {
+  kConsumerKey: 'f0ZEoyHAvSRdbFOM5F3K',
+  kConsumerSecret: 'OFsa8i2gAr',
+  kServiceAppName: 'StartKitRN',
+};
+
+const initials = Platform.OS === 'ios' ? iosKeys : androidKeys;
+
+export const onNaverButtonPress = () => {
+  return new Promise((resolve, reject) => {
+    NaverLogin.login(initials, async (err, token) => {
+      console.log(`\n\n  Token is fetched  :: ${JSON.stringify(token)} \n\n`);
+      // setNaverToken(token);
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(token);
+    });
+  });
+};
 
 export async function onKakaoButtonPress() {
   console.log('push kakao');
@@ -21,24 +52,6 @@ export async function onKakaoButtonPress() {
     console.log(error);
   }
 }
-
-// .then(result => {
-//   setToken(result.accessToken);
-//   logCallback(
-//     `Login Finished:${JSON.stringify(result)}`,
-//     setLoginLoading(false),
-//   );
-// })
-// .catch(err => {
-//   if (err.code === 'E_CANCELLED_OPERATION') {
-//     logCallback(`Login Cancelled:${err.message}`, setLoginLoading(false));
-//   } else {
-//     logCallback(
-//       `Login Failed:${err.code} ${err.message}`,
-//       setLoginLoading(false),
-//     );
-//   }
-// });
 
 export async function onFacebookButtonPress() {
   // Attempt login with permissions

@@ -19,6 +19,7 @@
 @import Firebase;
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
+#import <NaverThirdPartyLogin/NaverThirdPartyLoginConnection.h>
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -61,6 +62,9 @@ static void InitializeFlipper(UIApplication *application) {
 
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+  
+  [[NaverThirdPartyLoginConnection getSharedInstance] setIsNaverAppOauthEnable:YES];
+  [[NaverThirdPartyLoginConnection getSharedInstance] setIsInAppOauthEnable:YES];
   
   [FIRApp configure];
   return YES;
@@ -105,6 +109,10 @@ static void InitializeFlipper(UIApplication *application) {
   
   if([RNGoogleSignin application:application openURL:url options:options]) {
     return true;
+  }
+  
+  if ([url.scheme isEqualToString:@"naverlogin"]) {
+    return [[NaverThirdPartyLoginConnection getSharedInstance] application:application openURL:url options:options];
   }
   
   return false;
