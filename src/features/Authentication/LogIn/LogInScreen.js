@@ -15,6 +15,7 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import {
   onFacebookButtonPress,
   onGoogleButtonPress,
+  onKakaoButtonPress,
 } from '~/services/Authentication';
 
 import LoginButton from '~/components/Authentication/LoginButton';
@@ -72,7 +73,11 @@ export default function LogInScreen({ navigation }) {
               backgroudColor={SNSColors.kakao}
               fontColor={colors.black}
               title={'카카오톡으로 시작하기'}
-              onPress={() => Alert.alert('카카오톡 로그인')}
+              onPress={async () =>
+                await onKakaoButtonPress().then(() =>
+                  console.log('kakao login success!'),
+                )
+              }
             />
             <LoginButton
               backgroudColor={SNSColors.naver}

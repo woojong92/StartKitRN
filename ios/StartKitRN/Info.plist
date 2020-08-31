@@ -36,6 +36,14 @@
 				<string>com.googleusercontent.apps.288981239410-g3qt15tusqs7gact8cpl7e8df17k50ub</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakaocf1ce390f5b1baa16296fb76bcbceb74</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -47,12 +55,28 @@
 	<false/>
 	<key>FacebookDisplayName</key>
 	<string>StartKitRN</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>cf1ce390f5b1baa16296fb76bcbceb74</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
+    
+    <!-- 공통 -->
+    <string>kakao0123456789</string>
+
+    <!-- 간편로그인 -->
+    <string>kakaokompassauth</string>
+    <string>storykompassauth</string>
+
+    <!-- 카카오톡링크 -->
+    <string>kakaolink</string>
+    <string>kakaotalk-5.9.7</string>
+
+    <!-- 카카오스토리링크 -->
+    <string>storylink</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

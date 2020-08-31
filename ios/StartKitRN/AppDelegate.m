@@ -18,6 +18,7 @@
 @import UIKit;
 @import Firebase;
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -33,6 +34,7 @@ static void InitializeFlipper(UIApplication *application) {
 @implementation AppDelegate
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [KOSession handleDidBecomeActive];
   [FBSDKAppEvents activateApp];
 }
 
@@ -55,6 +57,7 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   
+  [KOSession sharedSession].automaticPeriodicRefresh = YES;
 
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
@@ -63,21 +66,50 @@ static void InitializeFlipper(UIApplication *application) {
   return YES;
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [KOSession handleDidEnterBackground];
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
 
+  if ([KOSession isKakaoAccountLoginCallback:url]) {
+      return [KOSession handleOpenURL:url];
+  }
   
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
+  if( [[FBSDKApplicationDelegate sharedInstance] application:application
                                                          openURL:url
                                                sourceApplication:sourceApplication
-                                                      annotation:annotation];
+                                                  annotation:annotation] ) {
+    return true;
+  }
+
+  return false;
+  
+
 }
 
+
+
 - (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
-  return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] || [RNGoogleSignin application:application openURL:url options:options];
+  
+  if ([KOSession isKakaoAccountLoginCallback:url]) {
+      return [KOSession handleOpenURL:url];
+  }
+  
+  if( [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] ) {
+    return true;
+  }
+  
+  if([RNGoogleSignin application:application openURL:url options:options]) {
+    return true;
+  }
+  
+  return false;
 }
+
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

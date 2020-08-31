@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">StartKitRN</string>
     <string name="facebook_app_id">3043403675786786</string>
+    <string name="kakao_app_key">cf1ce390f5b1baa16296fb76bcbceb74</string>
 </resources>
