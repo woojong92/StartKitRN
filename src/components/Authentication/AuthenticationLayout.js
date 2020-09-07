@@ -3,7 +3,7 @@ import Theme from '../../theme';
 
 export const AuthenticationLayout = styled.View`
   flex: 1;
-  padding: 30px;
+  padding-horizontal: 30px;
 `;
 
 export const AuthenticationTitleContainer = styled.View`
