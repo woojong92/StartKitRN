@@ -141,7 +141,7 @@ export default function LogInScreen({ navigation }) {
               fontColor={colors.black}
               title={'이메일로 계속하기'}
               style={{ borderWidth: 1, borderColor: colors.gray }}
-              onPress={() => navigation.push('Agreement')}
+              onPress={() => navigation.push('EmailLogIn')}
             />
           </View>
         </AuthenticationLayout>
@@ -153,5 +153,6 @@ export default function LogInScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });

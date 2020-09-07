@@ -8,15 +8,20 @@ import Theme from '../../theme';
 NextButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   width: PropTypes.string,
+  isOk: PropTypes.bool,
 };
 
-export function NextButton({ onPress, width = '100%' }) {
+export function NextButton({ onPress, width = '100%', isOk = false }) {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={onPress} disabled={!isOk}>
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        colors={[Theme.colors.primary, Theme.colors.secondary]}
+        colors={
+          isOk
+            ? [Theme.colors.primary, Theme.colors.secondary]
+            : [Theme.colors.gray, Theme.colors.gray]
+        }
         style={[
           {
             marginTop: 'auto',
