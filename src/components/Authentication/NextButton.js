@@ -24,7 +24,9 @@ export function NextButton({ onPress, width = '100%', isOk = false }) {
         }
         style={[
           {
-            marginTop: 'auto',
+            position: 'absolute',
+            bottom: 0,
+            // marginTop: 'auto',
             width: width,
             height: Platform.OS === 'ios' ? 80 : 60,
             justifyContent: 'center',
