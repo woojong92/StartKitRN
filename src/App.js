@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // import OnBoardingScreen from './features/Authentication/OnBoarding';
+import EmailLoginScreen from './features/Authentication/EmailLogin';
 import LogInScreen from './features/Authentication/LogIn';
 import SignUpScreen from './features/Authentication/SignUp';
 import AgreementScreen from './features/Authentication/Agreement';
@@ -24,6 +25,7 @@ function StackNavigator() {
           <Stack.Screen name="LogIn" component={LogInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Agreement" component={AgreementScreen} />
+          <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
         </>
       ) : (
         <Stack.Screen name="Home" component={HomeScreen} />
