@@ -12,6 +12,7 @@ import LogInScreen from './features/Authentication/LogIn';
 import SignUpScreen from './features/Authentication/SignUp';
 import AgreementScreen from './features/Authentication/Agreement';
 import ConfirmPhoneNumberScreen from './features/Authentication/ConfirmPhoneNumber';
+import ForgotPasswordScreen from './features/Authentication/ForgotPassword';
 
 import HomeScreen from './features/Home';
 
@@ -30,6 +31,10 @@ function StackNavigator() {
           <Stack.Screen
             name="ConfirmPhoneNumber"
             component={ConfirmPhoneNumberScreen}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswordScreen}
           />
         </>
       ) : (
