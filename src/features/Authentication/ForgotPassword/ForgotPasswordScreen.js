@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -6,7 +6,6 @@ import {
   Alert,
   ScrollView,
   Dimensions,
-  TouchableOpacity,
 } from 'react-native';
 
 import { NextButton } from '../../../components/Authentication/NextButton';
@@ -40,15 +39,21 @@ function ForgotPasswrodScreen({ navigation }) {
               </AuthenticationSubTitle>
             </AuthenticationTitleContainer>
 
-            <StyledTextInput
-              setValue={setEmail}
-              placeholder="wakeup@wakeup.com"
-              value={email}
-            />
+            <View style={{ marginTop: 50 }}>
+              <Text style={{ paddingVertical: 10 }}>이메일</Text>
+              <StyledTextInput
+                setValue={setEmail}
+                placeholder="wakeup@wakeup.com"
+                value={email}
+              />
+            </View>
           </AuthenticationLayout>
         </SafeAreaView>
       </ScrollView>
-      <NextButton onPress={() => Alert.alert('요청하기')} isOk={email !== ''} />
+      <NextButton
+        onPress={() => navigation.push('ResetPassword')}
+        isOk={email !== ''}
+      />
     </>
   );
 }
