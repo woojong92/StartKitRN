@@ -20,6 +20,7 @@ const StyledTextInput = styled.TextInput`
 `;
 
 const TextInputContainer = ({
+  label,
   leftItem,
   rightItem,
   placeholder,
@@ -28,26 +29,34 @@ const TextInputContainer = ({
   style,
   secureTextEntry = false,
   keyboardType = 'default',
+  warningMesseage,
 }) => {
   const { colors } = useTheme();
   const [focused, setFocused] = useState(false);
   return (
-    <StyledTextInputContainer
-      style={{ ...style }}
-      lineColor={focused ? colors.secondary : colors.gray}>
-      {leftItem}
-      <StyledTextInput
-        textColor={focused ? colors.secondary : colors.black}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={(text) => setValue(text)}
-        onFocus={() => setFocused(true)}
-        onEndEditing={() => setFocused(false)}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-      />
-      {rightItem}
-    </StyledTextInputContainer>
+    <View>
+      {label && <Text style={{ paddingVertical: 10 }}>{label}</Text>}
+
+      <StyledTextInputContainer
+        style={{ ...style }}
+        lineColor={focused ? colors.secondary : colors.gray}>
+        {leftItem}
+        <StyledTextInput
+          textColor={focused ? colors.secondary : colors.black}
+          placeholder={placeholder}
+          value={value}
+          onChangeText={(text) => setValue(text)}
+          onFocus={() => setFocused(true)}
+          onEndEditing={() => setFocused(false)}
+          secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
+        />
+        {rightItem}
+      </StyledTextInputContainer>
+      {warningMesseage !== '' && (
+        <Text style={{ marginTop: 10 }}>{warningMesseage}</Text>
+      )}
+    </View>
   );
 };
 
