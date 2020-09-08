@@ -128,7 +128,7 @@ function EmailLogin({ navigation }) {
         </SafeAreaView>
       </ScrollView>
       <NextButton
-        onPress={() => Alert.alert('Email Login')}
+        onPress={() => navigation.navigate('ConfirmPhoneNumber')}
         isOk={email !== '' && password != ''}
       />
     </>

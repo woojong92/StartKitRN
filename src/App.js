@@ -11,6 +11,7 @@ import EmailLoginScreen from './features/Authentication/EmailLogin';
 import LogInScreen from './features/Authentication/LogIn';
 import SignUpScreen from './features/Authentication/SignUp';
 import AgreementScreen from './features/Authentication/Agreement';
+import ConfirmPhoneNumberScreen from './features/Authentication/ConfirmPhoneNumber';
 
 import HomeScreen from './features/Home';
 
@@ -26,6 +27,10 @@ function StackNavigator() {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Agreement" component={AgreementScreen} />
           <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
+          <Stack.Screen
+            name="ConfirmPhoneNumber"
+            component={ConfirmPhoneNumberScreen}
+          />
         </>
       ) : (
         <Stack.Screen name="Home" component={HomeScreen} />
