@@ -71,7 +71,7 @@ function EmailLogin({ navigation }) {
                   alignItems: 'center',
                 }}>
                 <TouchableWithoutFeedback
-                  onPress={() => navigation.push('SignUp')}>
+                  onPress={() => navigation.push('OptionalUserInfo')}>
                   <Text style={{ marginRight: 5, fontSize: 12 }}>
                     이메일 회원가입
                   </Text>
