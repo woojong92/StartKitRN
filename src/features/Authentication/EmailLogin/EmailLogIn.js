@@ -3,11 +3,8 @@ import {
   SafeAreaView,
   Text,
   View,
-  Alert,
-  TextInput,
   TouchableWithoutFeedback,
   ScrollView,
-  Platform,
   Dimensions,
 } from 'react-native';
 
@@ -19,46 +16,10 @@ import {
   AuthenticationTitleContainer,
 } from '../../../components/Authentication/AuthenticationLayout';
 
-import styled from '@emotion/native';
-import { useTheme } from '@react-navigation/native';
-
-const StyledTextInput = styled.TextInput`
-  padding: 10px;
-  text-decoration: none;
-  font-size: 18px;
-  color: ${(props) => props?.textColor};
-  border: 0px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${(props) => props?.lineColor};
-`;
-
-const StyledTextInputContainer = ({
-  placeholder,
-  value,
-  setValue,
-  style,
-  type = 'none',
-}) => {
-  const { colors } = useTheme();
-  const [focused, setFocused] = useState(false);
-  const [secureTextEntry, setSecureTextEntry] = useState(type === 'password');
-  return (
-    <StyledTextInput
-      style={{ ...style }}
-      textColor={focused ? colors.secondary : colors.black}
-      lineColor={focused ? colors.secondary : colors.gray}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={(text) => setValue(text)}
-      onFocus={() => setFocused(true)}
-      onEndEditing={() => setFocused(false)}
-      secureTextEntry={secureTextEntry}
-      // keyboardType={'number-pad'}
-    />
-  );
-};
+import StyledTextInput from '../../../components/Authentication/StyledTextInput';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+
 function EmailLogin({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -83,7 +44,7 @@ function EmailLogin({ navigation }) {
               <View style={{ marginBottom: 50, marginTop: 50 }}>
                 <View style={{ marginBottom: 30 }}>
                   <Text>이메일</Text>
-                  <StyledTextInputContainer
+                  <StyledTextInput
                     setValue={setEmail}
                     placeholder="abcde@wakeup.com"
                     value={email}
@@ -93,11 +54,11 @@ function EmailLogin({ navigation }) {
 
                 <View>
                   <Text>비밀번호</Text>
-                  <StyledTextInputContainer
+                  <StyledTextInput
                     placeholder="비밀번호를 입력해주세요."
                     setValue={setPassword}
                     value={password}
-                    type={'password'}
+                    secureTextEntry={true}
                   />
                   <Text>{passwordWarningMessage}</Text>
                 </View>
