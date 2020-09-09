@@ -1,3 +1,3 @@
- import OutsideStore from './OutsideStore'
+import OutsideStore from './OutsideStore';
 
- export default OutsideStore;
+export default OutsideStore;
