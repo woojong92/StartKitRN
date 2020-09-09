@@ -31,7 +31,11 @@ function NecessaryUserInfoScreen({ navigation }) {
     <>
       <ScrollView>
         <SafeAreaView
-          style={{ flex: 1, height: windowHeight, backgroundColor: '#fff' }}>
+          style={{
+            flex: 1,
+            height: windowHeight - 30,
+            backgroundColor: '#fff',
+          }}>
           <AuthenticationLayout>
             <AuthenticationTitleContainer>
               <AuthenticationTitle style={{ marginBottom: 15 }}>
@@ -87,7 +91,10 @@ function NecessaryUserInfoScreen({ navigation }) {
           </AuthenticationLayout>
         </SafeAreaView>
       </ScrollView>
-      <NextButton onPress={() => Alert.alert('gg')} isOk={email !== ''} />
+      <NextButton
+        onPress={() => navigation.navigate('OptionalUserInfo')}
+        isOk={email !== ''}
+      />
     </>
   );
 }

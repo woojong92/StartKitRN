@@ -42,37 +42,38 @@ function StackNavigator() {
         headerTitle: false,
         gestureEnabled: false,
       }}>
-      {userToken === null ? (
-        <>
-          <Stack.Screen
-            name="LogIn"
-            component={LogInScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="Agreement" component={AgreementScreen} />
-          <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
-          <Stack.Screen
-            name="ConfirmPhoneNumber"
-            component={ConfirmPhoneNumberScreen}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPasswordScreen}
-          />
-          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
-          <Stack.Screen
-            name="OptionalUserInfo"
-            component={OptionalUserInfoScreen}
-          />
-          <Stack.Screen
-            name="NecessaryUserInfo"
-            component={NecessaryUserInfoScreen}
-          />
-        </>
-      ) : (
-        <Stack.Screen name="Home" component={HomeScreen} />
-      )}
+      {/* {userToken === null ? (
+        <> */}
+      <Stack.Screen
+        name="LogIn"
+        component={LogInScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="Agreement" component={AgreementScreen} />
+      <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
+      <Stack.Screen
+        name="ConfirmPhoneNumber"
+        component={ConfirmPhoneNumberScreen}
+      />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+      <Stack.Screen
+        name="OptionalUserInfo"
+        component={OptionalUserInfoScreen}
+      />
+      <Stack.Screen
+        name="NecessaryUserInfo"
+        component={NecessaryUserInfoScreen}
+      />
+      {/* </>
+      ) : ( */}
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false, gestureEnabled: true }}
+      />
+      {/* )} */}
     </Stack.Navigator>
   );
 }

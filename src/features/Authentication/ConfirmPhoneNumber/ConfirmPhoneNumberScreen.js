@@ -28,7 +28,11 @@ function ConfirmPhoneNumberScreen({ navigation }) {
     <>
       <ScrollView>
         <SafeAreaView
-          style={{ flex: 1, height: windowHeight, backgroundColor: '#fff' }}>
+          style={{
+            flex: 1,
+            height: windowHeight - 30,
+            backgroundColor: '#fff',
+          }}>
           <AuthenticationLayout>
             <AuthenticationTitleContainer>
               <AuthenticationTitle style={{ marginBottom: 15 }}>
@@ -38,40 +42,40 @@ function ConfirmPhoneNumberScreen({ navigation }) {
 
             <View>
               {/* 로그인 Input 영역 */}
-              <View style={{ marginBottom: 50, marginTop: 50 }}>
-                <View style={{ marginBottom: 50 }}>
-                  <Text style={{ paddingVertical: 10 }}>휴대폰 번호</Text>
-                  <StyledTextInput
-                    setValue={setPhoneNumber}
-                    placeholder="01012345678"
-                    value={phoneNumber}
-                    rightItem={
-                      <TouchableOpacity
-                        onPress={() => Alert.alert('인증번호 전송 완료')}>
-                        <View>
-                          <Text>인증번호 전송</Text>
-                        </View>
-                      </TouchableOpacity>
-                    }
-                  />
-                </View>
 
-                <View>
-                  <Text style={{ paddingVertical: 10 }}>인증번호</Text>
-                  <StyledTextInput
-                    setValue={setCertificationNumber}
-                    placeholder=""
-                    value={certificationNumber}
-                  />
+              <View style={{ marginBottom: 50 }}>
+                <StyledTextInput
+                  label={'휴대폰 번호'}
+                  setValue={setPhoneNumber}
+                  placeholder="01012345678"
+                  value={phoneNumber}
+                  rightItem={
+                    <TouchableOpacity
+                      onPress={() => Alert.alert('인증번호 전송 완료')}>
+                      <View>
+                        <Text>인증번호 전송</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
+                />
+              </View>
 
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'flex-end',
-                      marginTop: 10,
-                    }}>
-                    <Text>인증번호 재발송</Text>
-                  </View>
+              <View>
+                <StyledTextInput
+                  label={'인증번호'}
+                  setValue={setCertificationNumber}
+                  placeholder=""
+                  value={certificationNumber}
+                  warningMesseage=""
+                />
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    marginTop: 10,
+                  }}>
+                  <Text>인증번호 재발송</Text>
                 </View>
               </View>
             </View>
@@ -79,7 +83,7 @@ function ConfirmPhoneNumberScreen({ navigation }) {
         </SafeAreaView>
       </ScrollView>
       <NextButton
-        onPress={() => Alert.alert('Email Login')}
+        onPress={() => navigation.navigate('NecessaryUserInfo')}
         isOk={phoneNumber !== '' && certificationNumber !== ''}
       />
     </>
