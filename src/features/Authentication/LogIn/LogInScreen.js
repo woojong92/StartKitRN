@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Text, View, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import PropTypes from 'prop-types';
-
-const windowWidth = Dimensions.get('window').width;
 
 import { GoogleSignin } from '@react-native-community/google-signin';
 import {
@@ -105,44 +109,24 @@ export default function LogInScreen({ navigation }) {
               }
             />
 
-            {/* 컴포넌트로 짧게 구현 */}
             <View
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
+                marginTop: 30,
                 justifyContent: 'center',
-                marginVertical: 10,
+                alignItems: 'center',
               }}>
-              <View
-                style={{
-                  height: 1,
-                  width: windowWidth / 2 - 40,
-                  border: 0,
-                  borderBottomWidth: 1,
-                  borderBottomColor: colors.gray,
-                }}
-              />
-              <View style={{ marginHorizontal: 10 }}>
-                <Text>or</Text>
-              </View>
-              <View
-                style={{
-                  height: 1,
-                  width: windowWidth / 2 - 40,
-                  border: 0,
-                  borderBottomWidth: 1,
-                  borderBottomColor: colors.gray,
-                }}
-              />
+              <TouchableOpacity
+                style={{ padding: 10 }}
+                onPress={() => navigation.push('EmailLogIn')}>
+                <Text
+                  style={{
+                    textDecorationLine: 'underline',
+                    color: colors.black,
+                  }}>
+                  이메일로 계속하기
+                </Text>
+              </TouchableOpacity>
             </View>
-
-            <LoginButton
-              backgroudColor={colors.white}
-              fontColor={colors.black}
-              title={'이메일로 계속하기'}
-              style={{ borderWidth: 1, borderColor: colors.gray }}
-              onPress={() => navigation.push('EmailLogIn')}
-            />
           </View>
         </AuthenticationLayout>
       </SafeAreaView>

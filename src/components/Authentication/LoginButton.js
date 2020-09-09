@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 
 LoginButton.propTypes = {
@@ -33,6 +33,16 @@ export default function LoginButton({
           alignItems: 'center',
           borderRadius: 4,
           marginVertical: 10,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.2,
+            },
+            Android: {
+              elevation: 1,
+            },
+          }),
         },
       ]}
       onPress={onPress}>
