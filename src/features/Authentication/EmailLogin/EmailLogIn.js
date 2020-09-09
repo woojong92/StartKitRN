@@ -23,8 +23,8 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 function EmailLogin({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailWarningMessage, setEmailWarningMessage] = useState('');
-  const [passwordWarningMessage, setPasswordWarningMessage] = useState('');
+  const [emailWarningMessage, setEmailWarningMessage] = useState(' ');
+  const [passwordWarningMessage, setPasswordWarningMessage] = useState(' ');
 
   return (
     <>
@@ -41,27 +41,23 @@ function EmailLogin({ navigation }) {
 
             <View>
               {/* 로그인 Input 영역 */}
-              <View style={{ marginBottom: 50, marginTop: 50 }}>
-                <View style={{ marginBottom: 30 }}>
-                  <Text>이메일</Text>
-                  <StyledTextInput
-                    setValue={setEmail}
-                    placeholder="abcde@wakeup.com"
-                    value={email}
-                  />
-                  <Text>{emailWarningMessage}</Text>
-                </View>
+              <View>
+                <StyledTextInput
+                  label={'이메일'}
+                  setValue={setEmail}
+                  placeholder="abcde@wakeup.com"
+                  value={email}
+                  warningMesseage={emailWarningMessage}
+                />
 
-                <View>
-                  <Text>비밀번호</Text>
-                  <StyledTextInput
-                    placeholder="비밀번호를 입력해주세요."
-                    setValue={setPassword}
-                    value={password}
-                    secureTextEntry={true}
-                  />
-                  <Text>{passwordWarningMessage}</Text>
-                </View>
+                <StyledTextInput
+                  label={'비밀번호'}
+                  placeholder="비밀번호를 입력해주세요."
+                  setValue={setPassword}
+                  value={password}
+                  secureTextEntry={true}
+                  warningMesseage={passwordWarningMessage}
+                />
               </View>
 
               <View
