@@ -77,7 +77,7 @@ function OptionalUserInfoScreen({ navigation }) {
               </AuthenticationSubTitle>
             </AuthenticationTitleContainer>
 
-            <View style={{ marginTop: 50 }}>
+            <View>
               <StyledTextInput
                 label="이름"
                 setValue={setName}
@@ -119,7 +119,7 @@ function OptionalUserInfoScreen({ navigation }) {
         </SafeAreaView>
       </ScrollView>
       <NextButton
-        onPress={() => navigation.push('ResetPassword')}
+        onPress={() => navigation.push('NecessaryUserInfo')}
         isOk={name !== '' && birth !== '' && gender !== ''}
       />
     </>

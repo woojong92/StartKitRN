@@ -15,8 +15,9 @@ import ConfirmPhoneNumberScreen from './features/Authentication/ConfirmPhoneNumb
 import ForgotPasswordScreen from './features/Authentication/ForgotPassword';
 import ResetPasswordScreen from './features/Authentication/ResetPassword';
 import OptionalUserInfoScreen from './features/Authentication/OptionalUserInfo';
+import NecessaryUserInfoScreen from './features/Authentication/NecessaryUserInfo';
 
-import HomeScreen from './features/Home';
+import HomeScreen from './features/Home/OutsideStore';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,10 @@ function StackNavigator() {
           <Stack.Screen
             name="OptionalUserInfo"
             component={OptionalUserInfoScreen}
+          />
+          <Stack.Screen
+            name="NecessaryUserInfo"
+            component={NecessaryUserInfoScreen}
           />
         </>
       ) : (

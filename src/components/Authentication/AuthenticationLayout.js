@@ -7,7 +7,8 @@ export const AuthenticationLayout = styled.View`
 `;
 
 export const AuthenticationTitleContainer = styled.View`
-  margin-vertical: 30px;
+  margin-top: 30px;
+  margin-bottom: 70px;
 `;
 
 export const AuthenticationTitle = styled.Text`
