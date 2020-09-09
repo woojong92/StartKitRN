@@ -5,6 +5,8 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Dimensions,
+  Button,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -70,42 +72,50 @@ export default function LogInScreen({ navigation }) {
             <LoginButton
               backgroudColor={SNSColors.kakao}
               fontColor={colors.black}
-              title={'카카오톡으로 시작하기'}
-              onPress={async () =>
-                await onKakaoButtonPress().then(() =>
-                  console.log('kakao login success!'),
-                )
+              title={'카카오톡으로 계속하기'}
+              onPress={
+                () => navigation.navigate('Agreement')
+                // async () =>
+                // await onKakaoButtonPress().then(() =>
+                //   console.log('kakao login success!'),
+                // )
               }
             />
             <LoginButton
               backgroudColor={SNSColors.naver}
               fontColor={colors.white}
-              title={'네이버로 시작하기'}
-              onPress={async () =>
-                await onNaverButtonPress().then(() =>
-                  console.log('naver login success!'),
-                )
+              title={'네이버로 계속하기'}
+              onPress={
+                () => navigation.navigate('Agreement')
+                // async () =>
+                // await onNaverButtonPress().then(() =>
+                //   console.log('naver login success!'),
+                // )
               }
             />
             <LoginButton
               backgroudColor={SNSColors.facebook}
               fontColor={colors.white}
-              title={'페이스북으로 시작하기'}
-              onPress={async () =>
-                await onFacebookButtonPress().then(() =>
-                  console.log('Signed in with Facebook!'),
-                )
+              title={'페이스북으로 계속하기'}
+              onPress={
+                () => navigation.navigate('Agreement')
+                // async () =>
+                // await onFacebookButtonPress().then(() =>
+                //   console.log('Signed in with Facebook!'),
+                // )
               }
             />
             <LoginButton
               backgroudColor={SNSColors.google}
               fontColor={colors.black}
-              title={'구글로 시작하기'}
+              title={'구글로 계속하기'}
               style={{ borderWidth: 1, borderColor: colors.gray }}
-              onPress={async () =>
-                await onGoogleButtonPress().then(() =>
-                  console.log('Signed in with Google!'),
-                )
+              onPress={
+                () => navigation.navigate('Agreement')
+                // async () =>
+                // await onGoogleButtonPress().then(() =>
+                //   console.log('Signed in with Google!'),
+                // )
               }
             />
 
@@ -117,7 +127,7 @@ export default function LogInScreen({ navigation }) {
               }}>
               <TouchableOpacity
                 style={{ padding: 10 }}
-                onPress={() => navigation.push('EmailLogIn')}>
+                onPress={() => navigation.navigate('Agreement')}>
                 <Text
                   style={{
                     textDecorationLine: 'underline',
@@ -128,15 +138,26 @@ export default function LogInScreen({ navigation }) {
               </TouchableOpacity>
             </View>
           </View>
+
+          <Button
+            style={{ margin: 20, width: 100, height: 30 }}
+            title={'임시 Home화면으로'}
+            onPress={() => {
+              navigation.navigate('Home');
+            }}
+          />
         </AuthenticationLayout>
       </SafeAreaView>
     </>
   );
 }
 
+const { height: windowHeight } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    height: windowHeight,
   },
 });

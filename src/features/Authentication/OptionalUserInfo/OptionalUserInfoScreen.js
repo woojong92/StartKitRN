@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, ScrollView, Dimensions, Text } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  ScrollView,
+  Dimensions,
+  Text,
+  Alert,
+} from 'react-native';
 import { NextButton } from '../../../components/Authentication/NextButton';
 import {
   AuthenticationLayout,
@@ -66,7 +73,11 @@ function OptionalUserInfoScreen({ navigation }) {
     <>
       <ScrollView>
         <SafeAreaView
-          style={{ flex: 1, height: windowHeight, backgroundColor: '#fff' }}>
+          style={{
+            flex: 1,
+            height: windowHeight - 30,
+            backgroundColor: '#fff',
+          }}>
           <AuthenticationLayout>
             <AuthenticationTitleContainer>
               <AuthenticationTitle style={{ marginBottom: 15 }}>
@@ -119,7 +130,7 @@ function OptionalUserInfoScreen({ navigation }) {
         </SafeAreaView>
       </ScrollView>
       <NextButton
-        onPress={() => navigation.push('NecessaryUserInfo')}
+        onPress={() => navigation.navigate('Home')}
         isOk={name !== '' && birth !== '' && gender !== ''}
       />
     </>
