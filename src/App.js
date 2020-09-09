@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-// import OnBoardingScreen from './features/Authentication/OnBoarding';
 import EmailLoginScreen from './features/Authentication/EmailLogin';
 import LogInScreen from './features/Authentication/LogIn';
 import SignUpScreen from './features/Authentication/SignUp';
@@ -24,10 +23,32 @@ const Stack = createStackNavigator();
 function StackNavigator() {
   const userToken = useSelector((state) => state.auth.userToken);
   return (
-    <Stack.Navigator initialRouteName="LogIn" mode="card" headerMode="none">
+    <Stack.Navigator
+      initialRouteName="LogIn"
+      mode="card"
+      headerMode="float"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: 'transparent',
+          shadowRadius: 0,
+          shadowOffset: {
+            height: 0,
+            width: 0,
+          },
+        },
+        headerTintColor: '#111',
+        headerBackTitleVisible: false,
+        headerTitle: false,
+        gestureEnabled: false,
+      }}>
       {userToken === null ? (
         <>
-          <Stack.Screen name="LogIn" component={LogInScreen} />
+          <Stack.Screen
+            name="LogIn"
+            component={LogInScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Agreement" component={AgreementScreen} />
           <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
