@@ -1,23 +1,32 @@
-import React from 'react'
-import { ScrollView, View, Image } from 'react-native'
-import Theme from '../../theme'
+import React from 'react';
+import { ScrollView } from 'react-native';
+import HorizontalCardItem from './HorizontalCardItem';
+import PropTypes from 'prop-types';
 
-export default function HorizontalCardView () {
+HorizontalCardView.propTypes = {
+  data: PropTypes.array.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  size: PropTypes.object.isRequired,
+};
+
+export default function HorizontalCardView({ data, width, height, size }) {
   return (
     <ScrollView
       scrollEventThrottle={16}
       horizontal={true}
-      showsHorizontalScrollIndicator={false}
-    >
-      <View style={{height: 138, width: 156, marginRight: 5, backgroundColor: Theme.colors.primary }}>
-        
-      </View>
-      <View style={{height: 138, width: 156, marginRight: 5, backgroundColor: Theme.colors.primary }}>
-        
-      </View>
-      <View style={{height: 138, width: 156, marginRight: 5, backgroundColor: Theme.colors.primary }}>
-        
-      </View>
+      showsHorizontalScrollIndicator={false}>
+      {data.map((item, i) => {
+        return (
+          <HorizontalCardItem
+            key={i}
+            item={item}
+            width={width}
+            height={height}
+            size={size}
+          />
+        );
+      })}
     </ScrollView>
-  )
+  );
 }

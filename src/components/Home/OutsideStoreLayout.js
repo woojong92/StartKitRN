@@ -15,5 +15,5 @@ export const HomeSectionTitle = styled.Text`
 export const HomeSectionSubTitle = styled.Text`
   font-size: 11;
   font-weight: bold;
-  color: ${Theme.colors.black}
+  color: ${Theme.colors.black};
 `;
