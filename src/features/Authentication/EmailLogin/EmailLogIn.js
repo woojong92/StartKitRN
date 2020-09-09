@@ -67,14 +67,14 @@ function EmailLogin({ navigation }) {
                   alignItems: 'center',
                 }}>
                 <TouchableWithoutFeedback
-                  onPress={() => navigation.push('OptionalUserInfo')}>
+                  onPress={() => navigation.navigate('Agreement')}>
                   <Text style={{ marginRight: 5, fontSize: 12 }}>
                     이메일 회원가입
                   </Text>
                 </TouchableWithoutFeedback>
                 <Text>|</Text>
                 <TouchableWithoutFeedback
-                  onPress={() => navigation.push('ForgotPassword')}>
+                  onPress={() => navigation.navigate('ForgotPassword')}>
                   <Text style={{ marginLeft: 5, fontSize: 12 }}>
                     비밀번호 찾기
                   </Text>

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
+  Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -109,7 +110,10 @@ export default function LogInScreen({ navigation }) {
               backgroudColor={SNSColors.google}
               fontColor={colors.black}
               title={'구글로 계속하기'}
-              style={{ borderWidth: 1, borderColor: colors.gray }}
+              style={{
+                borderWidth: Platform.OS === 'ios' ? 0 : 1,
+                borderColor: colors.gray,
+              }}
               onPress={
                 () => navigation.navigate('Agreement')
                 // async () =>
@@ -127,7 +131,7 @@ export default function LogInScreen({ navigation }) {
               }}>
               <TouchableOpacity
                 style={{ padding: 10 }}
-                onPress={() => navigation.navigate('Agreement')}>
+                onPress={() => navigation.navigate('EmailLogIn')}>
                 <Text
                   style={{
                     textDecorationLine: 'underline',
