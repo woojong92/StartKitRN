@@ -7,9 +7,15 @@ CheckBoxItem.propTypes = {
   value: PropTypes.bool.isRequired,
   setValue: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  fontSize: PropTypes.number,
 };
 
-export default function CheckBoxItem({ value, setValue, children }) {
+export default function CheckBoxItem({
+  value,
+  setValue,
+  fontSize = 14,
+  children,
+}) {
   const onValueChange = (newValue) => {
     setValue(newValue);
   };
@@ -27,7 +33,7 @@ export default function CheckBoxItem({ value, setValue, children }) {
         onValueChange={onValueChange}
         style={{ marginRight: 10 }}
       />
-      <Text style={{ fontSize: 16 }}>{children}</Text>
+      <Text style={{ fontSize: fontSize }}>{children}</Text>
     </View>
   );
 }

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
   Text,
   View,
   Alert,
   ScrollView,
   Dimensions,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
 import { NextButton } from '../../../components/Authentication/NextButton';
@@ -14,41 +15,50 @@ import {
   AuthenticationLayout,
   AuthenticationTitle,
   AuthenticationTitleContainer,
+  AuthenticationSafeAreaViewContainer,
 } from '../../../components/Authentication/AuthenticationLayout';
-
+import PropTypes from 'prop-types';
 import StyledTextInput from '../../../components/Authentication/StyledTextInput';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+const { height: windowHeight } = Dimensions.get('window');
+
+ConfirmPhoneNumberScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 function ConfirmPhoneNumberScreen({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [certificationNumber, setCertificationNumber] = useState('');
+  const [phoneNumberWarningMessage, setPhoneNumberWarningMessage] = useState(
+    '',
+  );
 
   return (
     <>
-      <ScrollView>
-        <SafeAreaView
-          style={{
-            flex: 1,
-            height: windowHeight - 30,
-            backgroundColor: '#fff',
-          }}>
-          <AuthenticationLayout>
-            <AuthenticationTitleContainer>
-              <AuthenticationTitle style={{ marginBottom: 15 }}>
-                휴대폰 본인 확인
-              </AuthenticationTitle>
-            </AuthenticationTitleContainer>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
+        enabled>
+        <ScrollView>
+          <AuthenticationSafeAreaViewContainer>
+            <AuthenticationLayout>
+              <AuthenticationTitleContainer>
+                <AuthenticationTitle style={{ marginBottom: 15 }}>
+                  휴대폰 본인 확인
+                </AuthenticationTitle>
+              </AuthenticationTitleContainer>
 
-            <View>
-              {/* 로그인 Input 영역 */}
-
-              <View style={{ marginBottom: 50 }}>
+              <View>
+                {/* 로그인 Input 영역 */}
                 <StyledTextInput
                   label={'휴대폰 번호'}
                   setValue={setPhoneNumber}
                   placeholder="01012345678"
                   value={phoneNumber}
+                  warningMesseage={phoneNumberWarningMessage}
+                  keyboardType="number-pad"
+                  maxLength={11}
                   rightItem={
                     <TouchableOpacity
                       onPress={() => Alert.alert('인증번호 전송 완료')}>
@@ -58,15 +68,15 @@ function ConfirmPhoneNumberScreen({ navigation }) {
                     </TouchableOpacity>
                   }
                 />
-              </View>
 
-              <View>
                 <StyledTextInput
                   label={'인증번호'}
                   setValue={setCertificationNumber}
                   placeholder=""
                   value={certificationNumber}
-                  warningMesseage=""
+                  warningMesseage={'disable'}
+                  keyboardType="number-pad"
+                  maxLength={6}
                 />
 
                 <View
@@ -74,14 +84,16 @@ function ConfirmPhoneNumberScreen({ navigation }) {
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
                     marginTop: 10,
+                    marginBottom: 40,
                   }}>
                   <Text>인증번호 재발송</Text>
                 </View>
               </View>
-            </View>
-          </AuthenticationLayout>
-        </SafeAreaView>
-      </ScrollView>
+            </AuthenticationLayout>
+          </AuthenticationSafeAreaViewContainer>
+        </ScrollView>
+      </KeyboardAvoidingView>
+
       <NextButton
         onPress={() => navigation.navigate('NecessaryUserInfo')}
         isOk={phoneNumber !== '' && certificationNumber !== ''}

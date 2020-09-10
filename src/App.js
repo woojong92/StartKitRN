@@ -8,7 +8,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import EmailLoginScreen from './features/Authentication/EmailLogin';
 import LogInScreen from './features/Authentication/LogIn';
-import SignUpScreen from './features/Authentication/SignUp';
 import AgreementScreen from './features/Authentication/Agreement';
 import ConfirmPhoneNumberScreen from './features/Authentication/ConfirmPhoneNumber';
 import ForgotPasswordScreen from './features/Authentication/ForgotPassword';
@@ -26,7 +25,7 @@ function StackNavigator() {
     <Stack.Navigator
       initialRouteName="LogIn"
       mode="card"
-      headerMode="float"
+      headerMode={Platform.OS === 'ios' ? 'float' : 'none'}
       screenOptions={{
         headerStyle: {
           backgroundColor: '#fff',
@@ -49,7 +48,6 @@ function StackNavigator() {
         component={LogInScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="Agreement" component={AgreementScreen} />
       <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
       <Stack.Screen
@@ -79,6 +77,7 @@ function StackNavigator() {
 }
 
 import Theme from './theme';
+import { Platform } from 'react-native';
 
 function App() {
   return (

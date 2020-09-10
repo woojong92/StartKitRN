@@ -10,6 +10,7 @@ import {
   AuthenticationLayout,
   AuthenticationTitle,
   AuthenticationTitleContainer,
+  AuthenticationSafeAreaViewContainer,
 } from '../../../components/Authentication/AuthenticationLayout';
 import { NextButton } from '../../../components/Authentication/NextButton';
 import PropTypes from 'prop-types';
@@ -30,13 +31,13 @@ const Diver = styled.View`
   margin-vertical: 10px;
 `;
 
+const { height: windowHeight } = Dimensions.get('window');
+
 export default function AgreementScreen({ navigation }) {
   const [totalToggleCheckBox, setTotalToggleCheckBox] = useState(false);
   const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
   const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
   const [toggleCheckBox3, setToggleCheckBox3] = useState(false);
-  const [toggleCheckBox4, setToggleCheckBox4] = useState(false);
-  const [toggleCheckBox5, setToggleCheckBox5] = useState(false);
 
   const handleTotalToggleCheckBox = (newValue) => {
     setTotalToggleCheckBox(newValue);
@@ -48,10 +49,10 @@ export default function AgreementScreen({ navigation }) {
   return (
     <>
       <ScrollView>
-        <SafeAreaView style={styles.container}>
+        <AuthenticationSafeAreaViewContainer>
           <AuthenticationLayout>
             {/* AuthenticationTitle box */}
-            <AuthenticationTitleContainer>
+            <AuthenticationTitleContainer style={{ marginBottom: 60 }}>
               <AuthenticationTitle>서비스 이용을 위한</AuthenticationTitle>
               <AuthenticationTitle>이용약관 동의입니다.</AuthenticationTitle>
             </AuthenticationTitleContainer>
@@ -61,7 +62,8 @@ export default function AgreementScreen({ navigation }) {
               <View>
                 <CheckBoxItem
                   value={totalToggleCheckBox}
-                  setValue={handleTotalToggleCheckBox}>
+                  setValue={handleTotalToggleCheckBox}
+                  fontSize={18}>
                   약관 전체동의
                 </CheckBoxItem>
               </View>
@@ -87,7 +89,7 @@ export default function AgreementScreen({ navigation }) {
               </CheckBoxItem>
             </View>
           </AuthenticationLayout>
-        </SafeAreaView>
+        </AuthenticationSafeAreaViewContainer>
       </ScrollView>
 
       <NextButton
@@ -97,13 +99,3 @@ export default function AgreementScreen({ navigation }) {
     </>
   );
 }
-
-const { height: windowHeight } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    height: windowHeight - 30,
-  },
-});

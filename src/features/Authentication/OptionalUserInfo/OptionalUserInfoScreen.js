@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
   View,
   ScrollView,
   Dimensions,
   Text,
-  Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { NextButton } from '../../../components/Authentication/NextButton';
 import {
@@ -13,9 +13,9 @@ import {
   AuthenticationTitle,
   AuthenticationTitleContainer,
   AuthenticationSubTitle,
+  AuthenticationSafeAreaViewContainer,
 } from '../../../components/Authentication/AuthenticationLayout';
 import StyledTextInput from '../../../components/Authentication/StyledTextInput';
-const { height: windowHeight } = Dimensions.get('window');
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 
@@ -71,64 +71,68 @@ function OptionalUserInfoScreen({ navigation }) {
 
   return (
     <>
-      <ScrollView>
-        <SafeAreaView
-          style={{
-            flex: 1,
-            height: windowHeight - 30,
-            backgroundColor: '#fff',
-          }}>
-          <AuthenticationLayout>
-            <AuthenticationTitleContainer>
-              <AuthenticationTitle style={{ marginBottom: 15 }}>
-                추가 정보 입력
-              </AuthenticationTitle>
-              <AuthenticationSubTitle>
-                생일 쿠폰 등 각종 이벤트 진행을 위해 활용됩니다.
-              </AuthenticationSubTitle>
-            </AuthenticationTitleContainer>
-
-            <View>
-              <StyledTextInput
-                label="이름"
-                setValue={setName}
-                placeholder="웨이크업"
-                value={name}
-              />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
+        enabled>
+        <ScrollView>
+          <AuthenticationSafeAreaViewContainer>
+            <AuthenticationLayout>
+              <AuthenticationTitleContainer>
+                <AuthenticationTitle style={{ marginBottom: 15 }}>
+                  추가 정보 입력
+                </AuthenticationTitle>
+                <AuthenticationSubTitle>
+                  생일 쿠폰 등 각종 이벤트 진행을 위해 활용됩니다.
+                </AuthenticationSubTitle>
+              </AuthenticationTitleContainer>
 
               <View>
-                <Text style={{ paddingVertical: 10 }}>주민등록번호</Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}>
-                  <StyledTextInput
-                    style={{ width: 100 }}
-                    setValue={setBirth}
-                    placeholder=""
-                    value={birth}
-                    keyboardType="number-pad"
-                    maxLength={6}
-                    warningMesseage=""
-                  />
-                  <Diver />
-                  <StyledTextInput
-                    style={{ width: 30 }}
-                    setValue={setGender}
-                    placeholder=""
-                    value={gender}
-                    maxLength={1}
-                    keyboardType="number-pad"
-                    warningMesseage=""
-                  />
-                  <DotGroupContainer />
+                <StyledTextInput
+                  label="이름"
+                  setValue={setName}
+                  placeholder="웨이크업"
+                  value={name}
+                />
+
+                <View>
+                  <Text style={{ marginVertical: 5 }}>주민등록번호</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
+                    <StyledTextInput
+                      marginBottom={0}
+                      style={{ width: 100 }}
+                      setValue={setBirth}
+                      placeholder=""
+                      value={birth}
+                      keyboardType="number-pad"
+                      maxLength={6}
+                      warningMesseage=""
+                    />
+                    <Diver />
+                    <StyledTextInput
+                      marginBottom={0}
+                      style={{ width: 30 }}
+                      setValue={setGender}
+                      placeholder=""
+                      value={gender}
+                      maxLength={1}
+                      keyboardType="number-pad"
+                      warningMesseage=""
+                    />
+                    <DotGroupContainer />
+                  </View>
                 </View>
               </View>
-            </View>
-          </AuthenticationLayout>
-        </SafeAreaView>
-      </ScrollView>
+            </AuthenticationLayout>
+          </AuthenticationSafeAreaViewContainer>
+        </ScrollView>
+      </KeyboardAvoidingView>
+
       <NextButton
         onPress={() => navigation.navigate('Home')}
         isOk={name !== '' && birth !== '' && gender !== ''}
