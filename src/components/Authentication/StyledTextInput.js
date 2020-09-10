@@ -31,12 +31,13 @@ const TextInputContainer = ({
   keyboardType = 'default',
   warningMesseage,
   maxLength,
+  marginBottom = 15,
 }) => {
   const { colors } = useTheme();
   const [focused, setFocused] = useState(false);
   return (
-    <View>
-      {label && <Text style={{ paddingVertical: 10 }}>{label}</Text>}
+    <View style={{ marginBottom: marginBottom }}>
+      {label && <Text style={{ paddingVertical: 5 }}>{label}</Text>}
 
       <StyledTextInputContainer
         style={{ ...style }}
@@ -55,8 +56,8 @@ const TextInputContainer = ({
         />
         {rightItem}
       </StyledTextInputContainer>
-      {warningMesseage !== '' && (
-        <Text style={{ marginTop: 10 }}>{warningMesseage}</Text>
+      {warningMesseage !== 'disable' && (
+        <Text style={{ marginTop: 5 }}>{warningMesseage}</Text>
       )}
     </View>
   );

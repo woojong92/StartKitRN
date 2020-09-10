@@ -48,7 +48,7 @@ export default function LoginButton({
       onPress={onPress}>
       <Text
         style={{
-          fontSize: 18,
+          fontSize: 16,
           color: `${fontColor}`,
         }}>
         {title}

@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import {
-  StyleSheet,
-  SafeAreaView,
   Text,
   View,
   TouchableOpacity,
-  Dimensions,
   Button,
   Platform,
+  Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -30,6 +28,7 @@ import {
   AuthenticationTitleContainer,
   AuthenticationSubTitle,
   AuthenticationLayout,
+  AuthenticationSafeAreaViewContainer,
 } from '../../../components/Authentication/AuthenticationLayout';
 
 import { useTheme } from '@react-navigation/native';
@@ -40,6 +39,8 @@ const SNSColors = {
   facebook: '#1A76F2',
   google: '#FFFFFF',
 };
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 export default function LogInScreen({ navigation }) {
   useEffect(() => {
@@ -53,9 +54,9 @@ export default function LogInScreen({ navigation }) {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <AuthenticationSafeAreaViewContainer>
         <AuthenticationLayout>
-          <AuthenticationTitleContainer>
+          <AuthenticationTitleContainer style={{ marginBottom: 40 }}>
             <AuthenticationTitle color={colors.black}>
               WAKE UP에
             </AuthenticationTitle>
@@ -151,17 +152,7 @@ export default function LogInScreen({ navigation }) {
             }}
           />
         </AuthenticationLayout>
-      </SafeAreaView>
+      </AuthenticationSafeAreaViewContainer>
     </>
   );
 }
-
-const { height: windowHeight } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    height: windowHeight,
-  },
-});

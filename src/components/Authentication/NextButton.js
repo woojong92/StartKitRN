@@ -1,6 +1,6 @@
 import React from 'react';
 // import styled from '@emotion/native';
-import { TouchableWithoutFeedback, Text, Platform } from 'react-native';
+import { TouchableWithoutFeedback, Text, Platform, View } from 'react-native';
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import Theme from '../../theme';
