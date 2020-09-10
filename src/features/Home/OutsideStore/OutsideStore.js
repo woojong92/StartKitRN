@@ -7,15 +7,16 @@ import {
   Image,
   TouchableWithoutFeedback,
   ScrollView,
+  Platform,
 } from 'react-native';
 import HomeHeader from '../../../components/Home/HomeHeader';
-import LinearGradient from 'react-native-linear-gradient';
 import { useTheme } from '@react-navigation/native';
 import {
   HomeSectionTitle,
   HomeSectionSubTitle,
 } from '../../../components/Home/OutsideStoreLayout';
 import HorizontalCardView from '../../../components/Home/HorizontalCardView';
+import GradientItem from '../../../components/Home/GradientItem';
 
 export default function OutsideStore() {
   // 임시 HotPlaceData
@@ -42,7 +43,24 @@ export default function OutsideStore() {
       distance: '1.3KM',
     },
   ];
+
+  // 임시 AdvertiseData
+  const initialAdvertiseData = [
+    {
+      id: 1,
+      imageUri: '',
+    },
+    {
+      id: 2,
+      imageUri: '',
+    },
+    {
+      id: 3,
+      imageUri: '',
+    },
+  ];
   const [HotPlaceData, setHotPlaceData] = useState(initialHotPlaceData);
+  const [AdvertiseData, setAdvertiseData] = useState(initialAdvertiseData);
   const { colors } = useTheme();
   return (
     <>
@@ -80,19 +98,13 @@ export default function OutsideStore() {
                   8GB
                 </Text>
               </View>
-              <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={[colors.primary, colors.secondary]}
-                style={[
-                  {
-                    backgroundColor: colors.red,
-                    height: 19,
-                    top: 8,
-                    width: '70%',
-                    position: 'absolute',
-                  },
-                ]}>
+              <GradientItem
+                style={{
+                  height: 19,
+                  top: 8,
+                  width: '70%',
+                  position: 'absolute',
+                }}>
                 <Text
                   style={{
                     color: colors.white,
@@ -101,7 +113,7 @@ export default function OutsideStore() {
                   }}>
                   6.7GB
                 </Text>
-              </LinearGradient>
+              </GradientItem>
             </View>
           </View>
 
@@ -134,18 +146,13 @@ export default function OutsideStore() {
               />
             </View>
             <TouchableWithoutFeedback>
-              <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                colors={[colors.primary, colors.secondary]}
-                style={[
-                  {
-                    height: 39,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginTop: 34,
-                  },
-                ]}>
+              <GradientItem
+                style={{
+                  height: 39,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: 34,
+                }}>
                 <Text
                   style={{
                     fontSize: 13,
@@ -154,11 +161,11 @@ export default function OutsideStore() {
                   }}>
                   안전하게 인터넷 접속하기
                 </Text>
-              </LinearGradient>
+              </GradientItem>
             </TouchableWithoutFeedback>
           </View>
 
-          <View style={{ paddingHorizontal: 22 }}>
+          <View style={{ paddingLeft: 22 }}>
             <View style={{ marginTop: 33, marginBottom: 15 }}>
               <HomeSectionTitle>근처 핫 플레이스</HomeSectionTitle>
               <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -177,52 +184,67 @@ export default function OutsideStore() {
               data={HotPlaceData}
               width={156}
               height={138}
-              size={{
-                nameSize: '13',
-                addressSize: '8',
-                categorySize: '6',
-                distanceSize: '6',
-                imageHeight: 13,
-                imageWidth: 15,
-              }}
+              isCircle={false}
+              isSmall={true}
             />
           </View>
 
-          <View style={{ paddingHorizontal: 22 }}>
+          <View style={{ paddingLeft: 22 }}>
             <View style={{ marginTop: 50, marginBottom: 13 }}>
               <HomeSectionTitle>요즘 뜨는 장소</HomeSectionTitle>
             </View>
             <HorizontalCardView
               data={HotPlaceData}
+              isCircle={false}
               width={156}
               height={138}
-              size={{
-                nameSize: '13',
-                addressSize: '8',
-                categorySize: '6',
-                distanceSize: '6',
-                imageHeight: 13,
-                imageWidth: 15,
-              }}
+              isSmall={true}
             />
           </View>
 
-          <View style={{ paddingHorizontal: 22 }}>
+          <View style={{ paddingLeft: 22 }}>
             <View style={{ marginTop: 50, marginBottom: 13 }}>
               <HomeSectionTitle>WAKE UP 추천</HomeSectionTitle>
             </View>
             <HorizontalCardView
               data={HotPlaceData}
+              isCircle={false}
               width={197}
               height={295}
+              isSmall={false}
+            />
+          </View>
+
+          <View style={{ paddingLeft: 22 }}>
+            <View style={{ marginTop: 50, marginBottom: 19 }}>
+              <HomeSectionTitle>어떤 곳으로 가고싶으세요?</HomeSectionTitle>
+            </View>
+            <HorizontalCardView
+              data={HotPlaceData}
+              isCircle={true}
+              width={95}
+              height={95}
               size={{
-                nameSize: '16',
-                addressSize: '9',
-                categorySize: '7',
-                distanceSize: '7',
-                imageHeight: 17,
-                imageWidth: 19,
+                nameSize: '11',
               }}
+            />
+          </View>
+
+          <View
+            style={{
+              paddingLeft: 22,
+              marginTop: 31,
+              ...Platform.select({
+                android: {
+                  marginBottom: 25,
+                },
+              }),
+            }}>
+            <HorizontalCardView
+              data={AdvertiseData}
+              isCircle={false}
+              width={203}
+              height={89}
             />
           </View>
         </ScrollView>

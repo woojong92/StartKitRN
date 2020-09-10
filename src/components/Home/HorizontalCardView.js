@@ -1,16 +1,25 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import HorizontalCardItem from './HorizontalCardItem';
+import HorizontalCircleItem from './HorizontalCircleItem';
 import PropTypes from 'prop-types';
 
 HorizontalCardView.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  size: PropTypes.object.isRequired,
+  isSmall: PropTypes.bool,
+  isCircle: PropTypes.bool.isRequired,
 };
 
-export default function HorizontalCardView({ data, width, height, size }) {
+export default function HorizontalCardView({
+  data,
+  width,
+  height,
+  isSmall,
+  isCircle,
+}) {
+  console.log(isSmall);
   return (
     <ScrollView
       scrollEventThrottle={16}
@@ -18,13 +27,18 @@ export default function HorizontalCardView({ data, width, height, size }) {
       showsHorizontalScrollIndicator={false}>
       {data.map((item, i) => {
         return (
-          <HorizontalCardItem
-            key={i}
-            item={item}
-            width={width}
-            height={height}
-            size={size}
-          />
+          <View key={i}>
+            {isCircle ? (
+              <HorizontalCircleItem item={item} width={width} height={height} />
+            ) : (
+              <HorizontalCardItem
+                item={item}
+                width={width}
+                height={height}
+                isSmall={isSmall}
+              />
+            )}
+          </View>
         );
       })}
     </ScrollView>
