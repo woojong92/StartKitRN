@@ -85,7 +85,7 @@ export default function AgreementScreen({ navigation }) {
               <CheckBoxItem
                 value={toggleCheckBox3}
                 setValue={setToggleCheckBox3}>
-                마케팅 황용 동의 (선택)
+                마케팅 활용 동의 (선택)
               </CheckBoxItem>
             </View>
           </AuthenticationLayout>

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Text,
   View,
   TouchableWithoutFeedback,
   ScrollView,
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -20,19 +19,47 @@ import {
 
 import StyledTextInput from '../../../components/Authentication/StyledTextInput';
 
-const { height: windowHeight } = Dimensions.get('window');
-
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { initialize, changeField } from './emailLogInSlice';
 
-EmailLoginScreen.propTypes = {
+EmailLogInScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
-function EmailLoginScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function EmailLogInScreen({ navigation }) {
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   const [emailWarningMessage, setEmailWarningMessage] = useState('');
   const [passwordWarningMessage, setPasswordWarningMessage] = useState('');
+
+  const email = useSelector((state) => state.emailLogIn.email);
+  const password = useSelector((state) => state.emailLogIn.password);
+
+  const dispatch = useDispatch();
+
+  const onChangeEmail = useCallback(
+    (text) => {
+      console.log(text);
+      // const payload = { key: 'email', value: text };
+      dispatch(changeField({ key: 'email', value: text }));
+    },
+    [dispatch],
+  );
+
+  const onChangePassword = useCallback(
+    (text) => {
+      const payload = { key: 'password', value: text };
+      dispatch(changeField(payload));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    console.log('email', email);
+    console.log('password', password);
+    dispatch(initialize());
+  }, []);
 
   return (
     <>
@@ -57,17 +84,19 @@ function EmailLoginScreen({ navigation }) {
                 {/* 로그인 Input 영역 */}
                 <View>
                   <StyledTextInput
+                    key={'email'}
                     label={'이메일'}
-                    setValue={setEmail}
+                    setValue={onChangeEmail}
                     placeholder="abcde@wakeup.com"
                     value={email}
                     warningMesseage={emailWarningMessage}
                   />
 
                   <StyledTextInput
+                    key={'password'}
                     label={'비밀번호'}
                     placeholder="비밀번호를 입력해주세요."
-                    setValue={setPassword}
+                    setValue={onChangePassword}
                     value={password}
                     secureTextEntry={true}
                     warningMesseage={passwordWarningMessage}
@@ -84,14 +113,24 @@ function EmailLoginScreen({ navigation }) {
                   }}>
                   <TouchableWithoutFeedback
                     onPress={() => navigation.navigate('Agreement')}>
-                    <Text style={{ marginRight: 5, fontSize: 12 }}>
+                    <Text
+                      style={{
+                        padding: 10,
+                        marginRight: 5,
+                        fontSize: 12,
+                      }}>
                       이메일 회원가입
                     </Text>
                   </TouchableWithoutFeedback>
                   <Text>|</Text>
                   <TouchableWithoutFeedback
                     onPress={() => navigation.navigate('ForgotPassword')}>
-                    <Text style={{ marginLeft: 5, fontSize: 12 }}>
+                    <Text
+                      style={{
+                        padding: 10,
+                        marginLeft: 5,
+                        fontSize: 12,
+                      }}>
                       비밀번호 찾기
                     </Text>
                   </TouchableWithoutFeedback>
@@ -111,4 +150,4 @@ function EmailLoginScreen({ navigation }) {
   );
 }
 
-export default EmailLoginScreen;
+export default EmailLogInScreen;

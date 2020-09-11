@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import EmailLoginScreen from './features/Authentication/EmailLogin';
+import EmailLogInScreen from './features/Authentication/EmailLogIn';
 import LogInScreen from './features/Authentication/LogIn';
 import AgreementScreen from './features/Authentication/Agreement';
 import ConfirmPhoneNumberScreen from './features/Authentication/ConfirmPhoneNumber';
@@ -49,7 +49,7 @@ function StackNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Agreement" component={AgreementScreen} />
-      <Stack.Screen name="EmailLogIn" component={EmailLoginScreen} />
+      <Stack.Screen name="EmailLogIn" component={EmailLogInScreen} />
       <Stack.Screen
         name="ConfirmPhoneNumber"
         component={ConfirmPhoneNumberScreen}
