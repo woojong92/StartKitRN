@@ -28,8 +28,8 @@ const DotGroup = styled.View`
   flex-direction: row;
 `;
 const Dot = styled.View`
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   background-color: ${(props) => props?.color};
   border-radius: 25px;
   margin-horizontal: 3px;

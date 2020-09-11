@@ -1,3 +1,3 @@
-import EmailLogin from './EmailLogInScreen';
+import EmailLogInScreen from './EmailLogInScreen';
 
-export default EmailLogin;
+export default EmailLogInScreen;

@@ -12,6 +12,7 @@ const StyledTextInputContainer = styled.View`
 `;
 
 const StyledTextInput = styled.TextInput`
+  min-width: 70%;
   padding: 10px;
   text-decoration: none;
   font-size: 18px;
@@ -32,6 +33,7 @@ const TextInputContainer = ({
   warningMesseage,
   maxLength,
   marginBottom = 15,
+  returnKeyType = 'done',
 }) => {
   const { colors } = useTheme();
   const [focused, setFocused] = useState(false);
@@ -52,6 +54,7 @@ const TextInputContainer = ({
           onEndEditing={() => setFocused(false)}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
+          returnKeyType={returnKeyType}
           maxLength={maxLength}
         />
         {rightItem}
