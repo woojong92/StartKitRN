@@ -38,26 +38,13 @@ function NecessaryUserInfoScreen({ navigation }) {
   const password = useSelector((state) => state.necessaryUserInfo.password);
   const dispatch = useDispatch();
 
-  const onChangeEmailId = useCallback(
-    (text) => {
-      dispatch(changeField({ key: 'emailId', value: text }));
-    },
-    [dispatch],
-  );
-
-  const onChangeEmailAddress = useCallback(
-    (text) => {
-      dispatch(changeField({ key: 'emailAddress', value: text }));
-    },
-    [dispatch],
-  );
-
-  const onChangePassword = useCallback(
-    (text) => {
-      dispatch(changeField({ key: 'password', value: text }));
-    },
-    [dispatch],
-  );
+  const onChange = (key) =>
+    useCallback(
+      (text) => {
+        dispatch(changeField({ key: key, value: text }));
+      },
+      [dispatch],
+    );
 
   useEffect(() => {
     console.log(emailId, emailAddress, password);
@@ -95,7 +82,7 @@ function NecessaryUserInfoScreen({ navigation }) {
                     <StyledTextInput
                       marginBottom={0}
                       style={{ width: windowWidth / 2 - 60 }}
-                      setValue={onChangeEmailId}
+                      setValue={onChange('emailId')}
                       placeholder=""
                       value={emailId}
                       warningMesseage="disable"
@@ -104,7 +91,7 @@ function NecessaryUserInfoScreen({ navigation }) {
                     <StyledTextInput
                       marginBottom={0}
                       style={{ width: windowWidth / 2 - 30 }}
-                      setValue={onChangeEmailAddress}
+                      setValue={onChange('emailAddress')}
                       placeholder="직접입력"
                       value={emailAddress}
                       rightItem={<Text>{'\\/'}</Text>}
@@ -118,7 +105,7 @@ function NecessaryUserInfoScreen({ navigation }) {
 
                 <StyledTextInput
                   label="비밀번호"
-                  setValue={onChangePassword}
+                  setValue={onChange('password')}
                   placeholder=""
                   secureTextEntry={true}
                   value={password}

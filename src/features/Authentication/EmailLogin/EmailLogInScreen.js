@@ -38,25 +38,15 @@ function EmailLogInScreen({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const onChangeEmail = useCallback(
-    (text) => {
-      console.log(text);
-      dispatch(changeField({ key: 'email', value: text }));
-    },
-    [dispatch],
-  );
-
-  const onChangePassword = useCallback(
-    (text) => {
-      const payload = { key: 'password', value: text };
-      dispatch(changeField(payload));
-    },
-    [dispatch],
-  );
+  const onChange = (key) =>
+    useCallback(
+      (text) => {
+        dispatch(changeField({ key: key, value: text }));
+      },
+      [dispatch],
+    );
 
   useEffect(() => {
-    console.log('email', email);
-    console.log('password', password);
     dispatch(initialize());
   }, []);
 
@@ -85,7 +75,7 @@ function EmailLogInScreen({ navigation }) {
                   <StyledTextInput
                     key={'email'}
                     label={'이메일'}
-                    setValue={onChangeEmail}
+                    setValue={onChange('email')}
                     placeholder="abcde@wakeup.com"
                     value={email}
                     warningMesseage={emailWarningMessage}
@@ -95,7 +85,7 @@ function EmailLogInScreen({ navigation }) {
                     key={'password'}
                     label={'비밀번호'}
                     placeholder="비밀번호를 입력해주세요."
-                    setValue={onChangePassword}
+                    setValue={onChange('password')}
                     value={password}
                     secureTextEntry={true}
                     warningMesseage={passwordWarningMessage}
