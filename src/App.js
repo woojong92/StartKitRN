@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import EmailLogInScreen from './features/Authentication/EmailLogIn';
 import LogInScreen from './features/Authentication/LogIn';
@@ -16,8 +17,10 @@ import OptionalUserInfoScreen from './features/Authentication/OptionalUserInfo';
 import NecessaryUserInfoScreen from './features/Authentication/NecessaryUserInfo';
 
 import HomeScreen from './features/Home/OutsideStore';
+import DrawerContent from './components/Home/DrawerContent';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function StackNavigator() {
   const userToken = useSelector((state) => state.auth.userToken);
@@ -71,8 +74,25 @@ function StackNavigator() {
         component={HomeScreen}
         options={{ headerShown: false, gestureEnabled: true }}
       />
+      {/* <Stack.Screen name="Drawer" component={DrawerNavigator} /> */}
       {/* )} */}
     </Stack.Navigator>
+  );
+}
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        swipeEnabled: false,
+      }}
+      drawerStyle={{
+        width: 116,
+      }}
+      drawerContent={(props) => <DrawerContent {...props} />}
+      drawerPosition={'right'}>
+      <Stack.Screen name="Home" component={StackNavigator} />
+    </Drawer.Navigator>
   );
 }
 
@@ -83,7 +103,7 @@ function App() {
   return (
     <Provider store={store}>
       <NavigationContainer theme={Theme}>
-        <StackNavigator />
+        <DrawerNavigator />
       </NavigationContainer>
     </Provider>
   );

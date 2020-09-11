@@ -11,7 +11,7 @@ export default function GradientItem(props) {
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+      end={{ x: 1.5, y: 1.5 }}
       colors={[colors.primary, colors.secondary]}
       {...props}
     />
