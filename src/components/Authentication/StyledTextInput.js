@@ -21,6 +21,7 @@ const StyledTextInput = styled.TextInput`
 `;
 
 const TextInputContainer = ({
+  textContentType,
   label,
   leftItem,
   rightItem,
@@ -56,6 +57,7 @@ const TextInputContainer = ({
           keyboardType={keyboardType}
           returnKeyType={returnKeyType}
           maxLength={maxLength}
+          textContentType={textContentType}
         />
         {rightItem}
       </StyledTextInputContainer>

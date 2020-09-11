@@ -14,8 +14,8 @@ import {
 
 export const emailLogInAdapter = createEntityAdapter();
 const initialState = emailLogInAdapter.getInitialState({
-  email: 'a',
-  password: 'a',
+  email: '',
+  password: '',
 });
 
 export const emailLogInSlice = createSlice({
