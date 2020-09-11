@@ -17,8 +17,12 @@ import {
 } from '../../../components/Home/OutsideStoreLayout';
 import HorizontalCardView from '../../../components/Home/HorizontalCardView';
 import GradientItem from '../../../components/Home/GradientItem';
+import PropTypes from 'prop-types';
 
-export default function OutsideStore() {
+OutsideStore.propTypes = {
+  navigation: PropTypes.object,
+};
+export default function OutsideStore({ navigation }) {
   // 임시 HotPlaceData
   const initialHotPlaceData = [
     {
@@ -65,7 +69,7 @@ export default function OutsideStore() {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <HomeHeader />
+        <HomeHeader navigation={navigation} />
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <View

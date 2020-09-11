@@ -19,7 +19,6 @@ export default function HorizontalCardView({
   isSmall,
   isCircle,
 }) {
-  console.log(isSmall);
   return (
     <ScrollView
       scrollEventThrottle={16}
