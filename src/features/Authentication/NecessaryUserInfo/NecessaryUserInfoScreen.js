@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -18,16 +18,51 @@ import {
 import StyledTextInput from '../../../components/Authentication/StyledTextInput';
 const { width: windowWidth } = Dimensions.get('window');
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeField, initialize } from './necessaryUserInfoSlice';
 
 NecessaryUserInfoScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
 function NecessaryUserInfoScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [emailAddress, setEmailAddress] = useState('');
+  // const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
+
+  const emailId = useSelector((state) => state.necessaryUserInfo.emailId);
+  const emailAddress = useSelector(
+    (state) => state.necessaryUserInfo.emailAddress,
+  );
+  const password = useSelector((state) => state.necessaryUserInfo.password);
+  const dispatch = useDispatch();
+
+  const onChangeEmailId = useCallback(
+    (text) => {
+      dispatch(changeField({ key: 'emailId', value: text }));
+    },
+    [dispatch],
+  );
+
+  const onChangeEmailAddress = useCallback(
+    (text) => {
+      dispatch(changeField({ key: 'emailAddress', value: text }));
+    },
+    [dispatch],
+  );
+
+  const onChangePassword = useCallback(
+    (text) => {
+      dispatch(changeField({ key: 'password', value: text }));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    console.log(emailId, emailAddress, password);
+    dispatch(initialize());
+  }, [dispatch]);
 
   return (
     <>
@@ -60,16 +95,16 @@ function NecessaryUserInfoScreen({ navigation }) {
                     <StyledTextInput
                       marginBottom={0}
                       style={{ width: windowWidth / 2 - 60 }}
-                      setValue={setEmail}
+                      setValue={onChangeEmailId}
                       placeholder=""
-                      value={email}
+                      value={emailId}
                       warningMesseage="disable"
                     />
                     <Text style={{ fontSize: 20 }}>@</Text>
                     <StyledTextInput
                       marginBottom={0}
                       style={{ width: windowWidth / 2 - 30 }}
-                      setValue={setEmailAddress}
+                      setValue={onChangeEmailAddress}
                       placeholder="직접입력"
                       value={emailAddress}
                       rightItem={<Text>{'\\/'}</Text>}
@@ -83,10 +118,11 @@ function NecessaryUserInfoScreen({ navigation }) {
 
                 <StyledTextInput
                   label="비밀번호"
-                  setValue={setPassword}
+                  setValue={onChangePassword}
                   placeholder=""
                   secureTextEntry={true}
                   value={password}
+                  textContentType={'password'}
                 />
 
                 <StyledTextInput
@@ -95,6 +131,7 @@ function NecessaryUserInfoScreen({ navigation }) {
                   placeholder=""
                   secureTextEntry={true}
                   value={checkPassword}
+                  textContentType={'password'}
                 />
               </View>
             </AuthenticationLayout>
@@ -104,7 +141,7 @@ function NecessaryUserInfoScreen({ navigation }) {
 
       <NextButton
         onPress={() => navigation.navigate('OptionalUserInfo')}
-        isOk={email !== ''}
+        isOk={emailId !== ''}
       />
     </>
   );

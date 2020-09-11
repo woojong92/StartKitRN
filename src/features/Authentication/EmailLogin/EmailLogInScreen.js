@@ -41,7 +41,6 @@ function EmailLogInScreen({ navigation }) {
   const onChangeEmail = useCallback(
     (text) => {
       console.log(text);
-      // const payload = { key: 'email', value: text };
       dispatch(changeField({ key: 'email', value: text }));
     },
     [dispatch],
