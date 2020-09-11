@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   ScrollView,
@@ -23,6 +23,8 @@ OptionalUserInfoScreen.propTypes = {
   navigation: PropTypes.object,
 };
 import styled from '@emotion/native';
+import { initialize, changeField } from './optionalUserInfoSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const DotGroup = styled.View`
   flex-direction: row;
@@ -65,9 +67,22 @@ const Diver = () => {
 };
 
 function OptionalUserInfoScreen({ navigation }) {
-  const [name, setName] = useState('');
-  const [birth, setBirth] = useState('');
-  const [gender, setGender] = useState('');
+  const dispatch = useDispatch();
+  const userName = useSelector((state) => state.optionalUserInfo.userName);
+  const birth = useSelector((state) => state.optionalUserInfo.birth);
+  const gender = useSelector((state) => state.optionalUserInfo.gender);
+
+  const onChange = (key) =>
+    useCallback(
+      (text) => {
+        dispatch(changeField({ key: key, value: text }));
+      },
+      [dispatch],
+    );
+
+  useEffect(() => {
+    dispatch(initialize());
+  }, [dispatch]);
 
   return (
     <>
@@ -91,9 +106,9 @@ function OptionalUserInfoScreen({ navigation }) {
               <View>
                 <StyledTextInput
                   label="이름"
-                  setValue={setName}
+                  setValue={onChange('userName')}
                   placeholder="웨이크업"
-                  value={name}
+                  value={userName}
                 />
 
                 <View>
@@ -106,7 +121,7 @@ function OptionalUserInfoScreen({ navigation }) {
                     <StyledTextInput
                       marginBottom={0}
                       style={{ width: 100 }}
-                      setValue={setBirth}
+                      setValue={onChange('birth')}
                       placeholder=""
                       value={birth}
                       keyboardType="number-pad"
@@ -117,7 +132,7 @@ function OptionalUserInfoScreen({ navigation }) {
                     <StyledTextInput
                       marginBottom={0}
                       style={{ width: 30 }}
-                      setValue={setGender}
+                      setValue={onChange('gender')}
                       placeholder=""
                       value={gender}
                       maxLength={1}
@@ -135,7 +150,7 @@ function OptionalUserInfoScreen({ navigation }) {
 
       <NextButton
         onPress={() => navigation.navigate('Home')}
-        isOk={name !== '' && birth !== '' && gender !== ''}
+        isOk={userName !== '' && birth !== '' && gender !== ''}
       />
     </>
   );
