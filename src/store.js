@@ -4,6 +4,7 @@ import emailLogInReducer from './features/Authentication/EmailLogIn/emailLogInSl
 import necessaryUserInfoReducer from './features/Authentication/NecessaryUserInfo/necessaryUserInfoSlice';
 import optionalUserInfoReducer from './features/Authentication/OptionalUserInfo/optionalUserInfoSlice';
 import confirmPhoneNumberReducer from './features/Authentication/ConfirmPhoneNumber/confirmPhoneNumberSlice';
+import agreementReducer from './features/Authentication/Agreement/agreementSlice';
 
 export default configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export default configureStore({
     necessaryUserInfo: necessaryUserInfoReducer,
     optionalUserInfo: optionalUserInfoReducer,
     confirmPhoneNumber: confirmPhoneNumberReducer,
+    agreement: agreementReducer,
   },
   middleware: [],
   enhancers: [],

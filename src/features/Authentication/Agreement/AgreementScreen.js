@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, ScrollView } from 'react-native';
 import {
   AuthenticationLayout,
   AuthenticationTitle,
@@ -14,14 +8,11 @@ import {
 } from '../../../components/Authentication/AuthenticationLayout';
 import { NextButton } from '../../../components/Authentication/NextButton';
 import PropTypes from 'prop-types';
-
-AgreementScreen.propTypes = {
-  navigation: PropTypes.object,
-};
-
 import CheckBoxItem from './CheckBoxItem';
 import Theme from '../../../theme';
 import styled from '@emotion/native';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeField } from './agreementSlice';
 
 const Diver = styled.View`
   width: 100%;
@@ -31,19 +22,38 @@ const Diver = styled.View`
   margin-vertical: 10px;
 `;
 
-const { height: windowHeight } = Dimensions.get('window');
+AgreementScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 export default function AgreementScreen({ navigation }) {
   const [totalToggleCheckBox, setTotalToggleCheckBox] = useState(false);
-  const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
-  const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
-  const [toggleCheckBox3, setToggleCheckBox3] = useState(false);
+
+  const useAndPrivacyAgreement = useSelector(
+    (state) => state.agreement.useAndPrivacyAgreement,
+  );
+  const locationAgreement = useSelector(
+    (state) => state.agreement.locationAgreement,
+  );
+  const marketingAgreement = useSelector(
+    (state) => state.agreement.marketingAgreement,
+  );
+
+  const dispatch = useDispatch();
+
+  const onChange = (key) =>
+    useCallback(
+      (newValue) => {
+        dispatch(changeField({ key: key, value: newValue }));
+      },
+      [dispatch],
+    );
 
   const handleTotalToggleCheckBox = (newValue) => {
     setTotalToggleCheckBox(newValue);
-    setToggleCheckBox1(newValue);
-    setToggleCheckBox2(newValue);
-    setToggleCheckBox3(newValue);
+    dispatch(changeField({ key: 'useAndPrivacyAgreement', value: newValue }));
+    dispatch(changeField({ key: 'locationAgreement', value: newValue }));
+    dispatch(changeField({ key: 'marketingAgreement', value: newValue }));
   };
 
   return (
@@ -71,20 +81,20 @@ export default function AgreementScreen({ navigation }) {
               <Diver />
 
               <CheckBoxItem
-                value={toggleCheckBox1}
-                setValue={setToggleCheckBox1}>
+                value={useAndPrivacyAgreement}
+                setValue={onChange('useAndPrivacyAgreement')}>
                 이용약관 및 개인정보처리방침 (필수)
               </CheckBoxItem>
 
               <CheckBoxItem
-                value={toggleCheckBox2}
-                setValue={setToggleCheckBox2}>
+                value={locationAgreement}
+                setValue={onChange('locationAgreement')}>
                 위치기반서비스 이용약관 (필수)
               </CheckBoxItem>
 
               <CheckBoxItem
-                value={toggleCheckBox3}
-                setValue={setToggleCheckBox3}>
+                value={marketingAgreement}
+                setValue={onChange('marketingAgreement')}>
                 마케팅 활용 동의 (선택)
               </CheckBoxItem>
             </View>
