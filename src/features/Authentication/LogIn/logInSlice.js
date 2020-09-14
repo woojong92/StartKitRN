@@ -8,7 +8,10 @@ export const authSlice = createSlice({
   },
   reducers: {
     setUserToken(state) {
-      return { ...state, userToken: 'gggggg' };
+      return { ...state, userToken: 'userToken' };
+    },
+    logOut(state) {
+      state.userToken = null;
     },
   },
 });
