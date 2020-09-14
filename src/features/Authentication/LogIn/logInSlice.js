@@ -1,26 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
-export const authSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    userToken: null,
-    me: {},
-  },
+export const logInAdapter = createEntityAdapter();
+const initialState = logInAdapter.getInitialState({
+  snsAccessToken: null,
+  snsType: null,
+  snsUuid: null,
+  snsEmail: null,
+  snsUserName: null,
+  snsBirth: null,
+  snsGender: null,
+});
+
+export const logInSlice = createSlice({
+  name: 'logIn',
+  initialState: initialState,
   reducers: {
-    setUserToken(state) {
-      return { ...state, userToken: 'userToken' };
-    },
-    logOut(state) {
-      state.userToken = null;
+    setSNSAccessToken(state) {
+      state.snsAccessToken = 'aaaa';
     },
   },
 });
 
-const reducer = authSlice.reducer;
-
-export const { setUserToken, logOut } = authSlice.actions;
+const { reducer, actions } = logInSlice;
+export const { setSNSAccessToken } = actions;
 export default reducer;
-
-// export const {
-//     userToken: userToken,
-// } = usersAdapter.getSelectors(state => state.auth);

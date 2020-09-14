@@ -25,7 +25,7 @@ import {
 } from '../../../components/Authentication/AuthenticationLayout';
 
 import { useTheme } from '@react-navigation/native';
-import { setUserToken } from './logInSlice';
+import { setAccessToken } from '../authenticationSlice';
 import { useDispatch } from 'react-redux';
 
 const SNSColors = {
@@ -143,7 +143,7 @@ export default function LogInScreen({ navigation }) {
             style={{ margin: 20, width: 100, height: 30 }}
             title={'임시 Home화면으로'}
             onPress={() => {
-              dispatch(setUserToken());
+              dispatch(setAccessToken());
             }}
           />
         </AuthenticationLayout>

@@ -4,7 +4,7 @@ import Theme from '../../theme';
 import GradientItem from './GradientItem';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../../features/Authentication/LogIn/logInSlice';
+import { logOut } from '../../features/Authentication/authenticationSlice';
 
 export default function DrawerContent({ navigation }) {
   const dispatch = useDispatch();
