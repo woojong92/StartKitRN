@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   Text,
   View,
   Alert,
   ScrollView,
-  Dimensions,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-
 import { NextButton } from '../../../components/Authentication/NextButton';
 import {
   AuthenticationLayout,
@@ -19,19 +17,37 @@ import {
 } from '../../../components/Authentication/AuthenticationLayout';
 import PropTypes from 'prop-types';
 import StyledTextInput from '../../../components/Authentication/StyledTextInput';
-
-const { height: windowHeight } = Dimensions.get('window');
+import { useSelector, useDispatch } from 'react-redux';
+import { changeField, initialize } from './confirmPhoneNumberSlice';
 
 ConfirmPhoneNumberScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
 function ConfirmPhoneNumberScreen({ navigation }) {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [certificationNumber, setCertificationNumber] = useState('');
   const [phoneNumberWarningMessage, setPhoneNumberWarningMessage] = useState(
     '',
   );
+  const phoneNumber = useSelector(
+    (state) => state.confirmPhoneNumber.phoneNumber,
+  );
+  const certificationNumber = useSelector(
+    (state) => state.confirmPhoneNumber.certificationNumber,
+  );
+
+  const dispatch = useDispatch();
+
+  const onChange = (key) =>
+    useCallback(
+      (text) => {
+        dispatch(changeField({ key: key, value: text }));
+      },
+      [dispatch],
+    );
+
+  useEffect(() => {
+    dispatch(initialize());
+  }, []);
 
   return (
     <>
@@ -53,7 +69,7 @@ function ConfirmPhoneNumberScreen({ navigation }) {
                 {/* 로그인 Input 영역 */}
                 <StyledTextInput
                   label={'휴대폰 번호'}
-                  setValue={setPhoneNumber}
+                  setValue={onChange('phoneNumber')}
                   placeholder="01012345678"
                   value={phoneNumber}
                   warningMesseage={phoneNumberWarningMessage}
@@ -71,8 +87,8 @@ function ConfirmPhoneNumberScreen({ navigation }) {
 
                 <StyledTextInput
                   label={'인증번호'}
-                  setValue={setCertificationNumber}
-                  placeholder=""
+                  setValue={onChange('certificationNumber')}
+                  placeholder="012345"
                   value={certificationNumber}
                   warningMesseage={'disable'}
                   keyboardType="number-pad"
