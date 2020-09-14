@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Button,
-  Platform,
-  Dimensions,
-} from 'react-native';
+import { Text, View, TouchableOpacity, Button, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { GoogleSignin } from '@react-native-community/google-signin';
@@ -32,6 +25,8 @@ import {
 } from '../../../components/Authentication/AuthenticationLayout';
 
 import { useTheme } from '@react-navigation/native';
+import { setUserToken } from './logInSlice';
+import { useDispatch } from 'react-redux';
 
 const SNSColors = {
   kakao: '#FFE502',
@@ -40,8 +35,6 @@ const SNSColors = {
   google: '#FFFFFF',
 };
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
-
 export default function LogInScreen({ navigation }) {
   useEffect(() => {
     GoogleSignin.configure({
@@ -49,6 +42,8 @@ export default function LogInScreen({ navigation }) {
         '288981239410-78k5bk1ue8eru4dkhj05dasv7mkm2njv.apps.googleusercontent.com',
     });
   }, []);
+
+  const dispatch = useDispatch();
 
   const { colors } = useTheme();
 
@@ -148,7 +143,7 @@ export default function LogInScreen({ navigation }) {
             style={{ margin: 20, width: 100, height: 30 }}
             title={'임시 Home화면으로'}
             onPress={() => {
-              navigation.navigate('Home');
+              dispatch(setUserToken());
             }}
           />
         </AuthenticationLayout>

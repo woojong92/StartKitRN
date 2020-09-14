@@ -44,40 +44,46 @@ function StackNavigator() {
         headerTitle: false,
         gestureEnabled: false,
       }}>
-      {/* {userToken === null ? (
-        <> */}
-      <Stack.Screen
-        name="LogIn"
-        component={LogInScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="Agreement" component={AgreementScreen} />
-      <Stack.Screen name="EmailLogIn" component={EmailLogInScreen} />
-      <Stack.Screen
-        name="ConfirmPhoneNumber"
-        component={ConfirmPhoneNumberScreen}
-      />
-      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-      <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
-      <Stack.Screen
-        name="OptionalUserInfo"
-        component={OptionalUserInfoScreen}
-      />
-      <Stack.Screen
-        name="NecessaryUserInfo"
-        component={NecessaryUserInfoScreen}
-      />
-      {/* </>
-      ) : ( */}
-      <Stack.Screen
+      {userToken === null ? (
+        <>
+          <Stack.Screen
+            name="LogIn"
+            component={LogInScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Agreement" component={AgreementScreen} />
+          <Stack.Screen name="EmailLogIn" component={EmailLogInScreen} />
+          <Stack.Screen
+            name="ConfirmPhoneNumber"
+            component={ConfirmPhoneNumberScreen}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswordScreen}
+          />
+          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+          <Stack.Screen
+            name="OptionalUserInfo"
+            component={OptionalUserInfoScreen}
+          />
+          <Stack.Screen
+            name="NecessaryUserInfo"
+            component={NecessaryUserInfoScreen}
+          />
+        </>
+      ) : (
+        <Stack.Screen name="Drawer" component={DrawerNavigator} />
+      )}
+    </Stack.Navigator>
+  );
+}
+
+{
+  /* <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{ headerShown: false, gestureEnabled: true }}
-      />
-      {/* <Stack.Screen name="Drawer" component={DrawerNavigator} /> */}
-      {/* )} */}
-    </Stack.Navigator>
-  );
+      /> */
 }
 
 function DrawerNavigator() {
@@ -91,7 +97,7 @@ function DrawerNavigator() {
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       drawerPosition={'right'}>
-      <Stack.Screen name="Home" component={StackNavigator} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Drawer.Navigator>
   );
 }
@@ -103,7 +109,8 @@ function App() {
   return (
     <Provider store={store}>
       <NavigationContainer theme={Theme}>
-        <DrawerNavigator />
+        <StackNavigator />
+        {/* <DrawerNavigator /> */}
       </NavigationContainer>
     </Provider>
   );
