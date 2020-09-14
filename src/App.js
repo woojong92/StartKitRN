@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function StackNavigator() {
-  const userToken = useSelector((state) => state.auth.userToken);
+  const accessToken = useSelector((state) => state.authentication.accessToken);
   return (
     <Stack.Navigator
       initialRouteName="LogIn"
@@ -44,7 +44,7 @@ function StackNavigator() {
         headerTitle: false,
         gestureEnabled: false,
       }}>
-      {userToken === null ? (
+      {accessToken === null ? (
         <>
           <Stack.Screen
             name="LogIn"
