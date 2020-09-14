@@ -1,32 +1,30 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Theme from '../../theme';
 import PropTypes from 'prop-types';
+import Theme from '../../../theme';
 
-HorizontalCardItem.propTypes = {
-  item: PropTypes.object,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+ThemePlaceItem.propTypes = {
+  data: PropTypes.object,
 };
 
-export default function HorizontalCardItem({ item, width, height }) {
-  const { name } = item;
+export default function ThemePlaceItem({ data }) {
+  const { name } = data;
   return (
     <View>
       <View
         style={{
-          height: height,
-          width: width,
+          height: 95,
+          width: 95,
           marginRight: 15,
           backgroundColor: Theme.colors.primary,
           justifyContent: 'center',
           alignItems: 'center',
-          borderRadius: width / 2,
+          borderRadius: 47,
         }}
       />
       <Text
         style={{
-          width: width,
+          width: 95,
           marginTop: 11,
           textAlign: 'center',
           fontSize: 11,
