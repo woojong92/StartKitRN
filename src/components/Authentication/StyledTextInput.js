@@ -35,6 +35,7 @@ const TextInputContainer = ({
   maxLength,
   marginBottom = 15,
   returnKeyType = 'done',
+  editable = true,
   onSubmitEditing = () => Keyboard.dismiss(),
 }) => {
   const { colors } = useTheme();
@@ -61,6 +62,7 @@ const TextInputContainer = ({
           textContentType={textContentType}
           blurOnSubmit={false}
           onSubmitEditing={onSubmitEditing}
+          editable={editable}
         />
         {rightItem}
       </StyledTextInputContainer>
