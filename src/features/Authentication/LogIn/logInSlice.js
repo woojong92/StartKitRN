@@ -1,22 +1,80 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createEntityAdapter,
+  createAsyncThunk,
+} from '@reduxjs/toolkit';
+import {
+  onFacebookButtonPress,
+  onGoogleButtonPress,
+  onKakaoButtonPress,
+  onNaverButtonPress,
+} from '~/services/Authentication';
 
 export const logInAdapter = createEntityAdapter();
 const initialState = logInAdapter.getInitialState({
-  snsAccessToken: null,
-  snsType: null,
-  snsUuid: null,
-  snsEmail: null,
-  snsUserName: null,
-  snsBirth: null,
-  snsGender: null,
+  entities: [],
+  loading: 'idle',
+  currentRequestId: undefined,
+  error: null,
+  SNSAccessToken: null,
+  SNSType: null,
+  SNSUuid: null,
+  SNSEmail: null,
+  SNSUserName: null,
+  SNSBirth: null,
+  SNSGender: null,
 });
+
+const fetchSNSLogin = createAsyncThunk(
+  'logIn/fetchSNSLogin',
+  async (snsType, { getState, requestId }) => {
+    const { loading, currentRequestId } = getState().logIn;
+    if (loading !== 'pending' || currentRequestId !== requestId) {
+      return;
+    }
+
+    if (snsType === 'kakao') {
+      const respnse = await onKakaoButtonPress();
+      return respnse.data;
+    } else if (snsType === 'naver') {
+      const respnse = await onNaverButtonPress();
+      return respnse.data;
+    } else if (snsType === 'google') {
+      const respnse = await onGoogleButtonPress();
+      return respnse.data;
+    } else if (snsType === 'facebook') {
+      const respnse = await onFacebookButtonPress();
+      return respnse.data;
+    }
+  },
+);
 
 export const logInSlice = createSlice({
   name: 'logIn',
   initialState: initialState,
-  reducers: {
-    setSNSAccessToken(state) {
-      state.snsAccessToken = 'aaaa';
+  reducers: {},
+  extraReducers: {
+    [fetchSNSLogin.pending]: (state, action) => {
+      if (state.loading === 'idle') {
+        state.loading = 'pending';
+        state.currentRequestId = action.meta.requestId;
+      }
+    },
+    [fetchSNSLogin.fulfilled]: (state, action) => {
+      const { requestId } = action.meta;
+      if (state.loading === 'pending' && state.currentRequestId === requestId) {
+        state.loading = 'idle';
+        state.entities.push(action.payload);
+        state.currentRequestId = undefined;
+      }
+    },
+    [fetchSNSLogin.rejected]: (state, action) => {
+      const { requestId } = action.meta;
+      if (state.loading === 'pending' && state.currentRequestId === requestId) {
+        state.loading = 'idle';
+        state.error = action.error;
+        state.currentRequestId = undefined;
+      }
     },
   },
 });
