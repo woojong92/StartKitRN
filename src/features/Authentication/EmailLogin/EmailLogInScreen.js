@@ -24,6 +24,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { initialize, changeField } from './emailLogInSlice';
 import { setAccessToken } from '../authenticationSlice';
 
+import { EyeIcon, EyeOffIcon } from '../../../components/icons';
+import { useTheme } from '@react-navigation/native';
+
 EmailLogInScreen.propTypes = {
   navigation: PropTypes.object,
 };
@@ -90,6 +93,7 @@ function EmailLogInScreen({ navigation }) {
                     value={password}
                     secureTextEntry={true}
                     warningMesseage={passwordWarningMessage}
+                    rightItem={<EyeOffIcon />}
                   />
                 </View>
 

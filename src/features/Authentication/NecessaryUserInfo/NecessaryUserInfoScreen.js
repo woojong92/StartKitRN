@@ -21,14 +21,17 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeField, initialize } from './necessaryUserInfoSlice';
 
+import {
+  EyeIcon,
+  EyeOffIcon,
+  ChevronDownIcon,
+} from '../../../components/icons';
+
 NecessaryUserInfoScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
 function NecessaryUserInfoScreen({ navigation }) {
-  // const [email, setEmail] = useState('');
-  // const [emailAddress, setEmailAddress] = useState('');
-  // const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
 
   const emailId = useSelector((state) => state.necessaryUserInfo.emailId);
@@ -94,7 +97,7 @@ function NecessaryUserInfoScreen({ navigation }) {
                       setValue={onChange('emailAddress')}
                       placeholder="직접입력"
                       value={emailAddress}
-                      rightItem={<Text>{'\\/'}</Text>}
+                      rightItem={<ChevronDownIcon />}
                       warningMesseage="disable"
                     />
                   </View>
@@ -110,6 +113,7 @@ function NecessaryUserInfoScreen({ navigation }) {
                   secureTextEntry={true}
                   value={password}
                   textContentType={'password'}
+                  rightItem={<EyeOffIcon />}
                 />
 
                 <StyledTextInput
