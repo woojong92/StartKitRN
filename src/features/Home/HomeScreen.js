@@ -7,21 +7,26 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
-import HomeHeader from '../../../components/Home/HomeHeader';
+import HomeHeader from '../../components/Home/HomeHeader';
 import { useTheme } from '@react-navigation/native';
-import GradientItem from '../../../components/Home/GradientItem';
+import GradientItem from '../../components/Home/GradientItem';
 import PropTypes from 'prop-types';
-import LocationView from '../../../components/Home/OutsideStore/LocationView';
-import RecommendView from '../../../components/Home/OutsideStore/RecommendView';
-import ThemePlaceView from '../../../components/Home/OutsideStore/ThemePlaceView';
-import EventView from '../../../components/Home/OutsideStore/EventView';
-import DataRemainView from '../../../components/Home/OutsideStore/DataRemainView';
-import WelcomewView from '../../../components/Home/OutsideStore/WelcomeView';
+// import LocationView from '../../components/Home/OutsideStore/LocationView';
+// import RecommendView from '../../components/Home/OutsideStore/RecommendView';
+// import ThemePlaceView from '../../components/Home/OutsideStore/ThemePlaceView';
+import EventView from '../../components/Home/Events/EventView';
+import DataRemainView from '../../components/Home/DataRemainView';
+import WelcomewView from '../../components/Home/WelcomeView';
+import {
+  LocationView,
+  RecommendView,
+  ThemePlaceView,
+} from '../../components/Home/Place/HorizontalCardLayout';
 
-OutsideStore.propTypes = {
+HomeScreen.propTypes = {
   navigation: PropTypes.object,
 };
-export default function OutsideStore({ navigation }) {
+export default function HomeScreen({ navigation }) {
   // 임시 HotPlaceData
   const initialHotPlaceData = [
     {

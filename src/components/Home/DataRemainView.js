@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import GradientItem from '../GradientItem';
+import GradientItem from './GradientItem';
 import { useTheme } from '@react-navigation/native';
 
 export default function DataRemainView() {
@@ -15,7 +15,7 @@ export default function DataRemainView() {
       }}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={{ marginRight: 4, fontWeight: 'bold' }}>B요금제</Text>
-        <Image source={require('../../../assets/Home/icn_wifi_color.png')} />
+        <Image source={require('../../assets/Home/icn_wifi_color.png')} />
       </View>
       <View>
         <View
