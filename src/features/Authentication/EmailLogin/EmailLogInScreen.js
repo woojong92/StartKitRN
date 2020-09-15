@@ -22,7 +22,6 @@ import StyledTextInput from '../../../components/Authentication/StyledTextInput'
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { initialize, changeField } from './emailLogInSlice';
-import { setAccessToken } from '../authenticationSlice';
 
 EmailLogInScreen.propTypes = {
   navigation: PropTypes.object,
@@ -133,7 +132,7 @@ function EmailLogInScreen({ navigation }) {
 
       <NextButton
         style={{ position: 'absolute' }}
-        onPress={() => dispatch(setAccessToken())}
+        onPress={() => navigation.navigate('Home')}
         isOk={email !== '' && password != ''}
       />
     </>
