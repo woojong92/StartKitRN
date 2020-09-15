@@ -34,7 +34,7 @@ export default function WelcomewView({ username }) {
           지금 바로 확인하기
         </Text>
         <Image
-          source={require('../../../assets/Home/icn_wifi_color.png')}
+          source={require('../../assets/Home/icn_wifi_color.png')}
           style={{ width: 14, height: 14 }}
         />
       </View>
