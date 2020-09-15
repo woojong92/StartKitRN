@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Text,
   View,
@@ -32,10 +32,11 @@ EmailLogInScreen.propTypes = {
 };
 
 function EmailLogInScreen({ navigation }) {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const [emailWarningMessage, setEmailWarningMessage] = useState('');
   const [passwordWarningMessage, setPasswordWarningMessage] = useState('');
+
+  const emailTextInputRef = useRef();
+  const passwordTextInputRef = useRef();
 
   const email = useSelector((state) => state.emailLogIn.email);
   const password = useSelector((state) => state.emailLogIn.password);
@@ -77,6 +78,8 @@ function EmailLogInScreen({ navigation }) {
                 {/* 로그인 Input 영역 */}
                 <View>
                   <StyledTextInput
+                    textInputRef={emailTextInputRef}
+                    onSubmitEditing={() => passwordTextInputRef.current.focus()}
                     key={'email'}
                     label={'이메일'}
                     setValue={onChange('email')}
@@ -86,6 +89,7 @@ function EmailLogInScreen({ navigation }) {
                   />
 
                   <StyledTextInput
+                    textInputRef={passwordTextInputRef}
                     key={'password'}
                     label={'비밀번호'}
                     placeholder="비밀번호를 입력해주세요."

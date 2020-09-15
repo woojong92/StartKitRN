@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
   View,
   ScrollView,
@@ -44,6 +44,11 @@ function NecessaryUserInfoScreen({ navigation }) {
   );
   const password = useSelector((state) => state.necessaryUserInfo.password);
   const dispatch = useDispatch();
+
+  const emailIdRef = useRef();
+  const emailAddressRef = useRef();
+  const passwordRef = useRef();
+  const checkPasswordRef = useRef();
 
   const onChange = (key) =>
     useCallback(
@@ -95,15 +100,25 @@ function NecessaryUserInfoScreen({ navigation }) {
                       justifyContent: 'space-between',
                     }}>
                     <StyledTextInput
+                      textInputRef={emailIdRef}
                       marginBottom={0}
                       style={{ width: windowWidth / 2 - 60 }}
                       setValue={onChange('emailId')}
+                      onSubmitEditing={() => {
+                        if (checkBoxValue === '직접입력') {
+                          emailAddressRef.current.focus();
+                        } else {
+                          passwordRef.current.focus();
+                        }
+                      }}
                       placeholder=""
                       value={emailId}
                       warningMesseage="disable"
                     />
                     <Text style={{ fontSize: 20 }}>@</Text>
                     <StyledTextInput
+                      textInputRef={emailAddressRef}
+                      onSubmitEditing={() => passwordRef.current.focus()}
                       marginBottom={0}
                       style={{ width: windowWidth / 2 - 30 }}
                       setValue={onChange('emailAddress')}
@@ -125,6 +140,8 @@ function NecessaryUserInfoScreen({ navigation }) {
 
                 <StyledTextInput
                   label="비밀번호"
+                  textInputRef={passwordRef}
+                  onSubmitEditing={() => checkPasswordRef.current.focus()}
                   setValue={onChange('password')}
                   placeholder=""
                   secureTextEntry={true}
@@ -135,6 +152,7 @@ function NecessaryUserInfoScreen({ navigation }) {
 
                 <StyledTextInput
                   label="비밀번호 확인"
+                  textInputRef={checkPasswordRef}
                   setValue={setCheckPassword}
                   placeholder=""
                   secureTextEntry={true}
