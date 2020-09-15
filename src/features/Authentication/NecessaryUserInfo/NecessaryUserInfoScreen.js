@@ -6,6 +6,7 @@ import {
   Text,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { NextButton } from '../../../components/Authentication/NextButton';
 import {
@@ -26,13 +27,16 @@ import {
   EyeOffIcon,
   ChevronDownIcon,
 } from '../../../components/icons';
+import SelectBoxContainer from '../../../components/SelectBox';
 
 NecessaryUserInfoScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
 function NecessaryUserInfoScreen({ navigation }) {
+  const [isModalVisible, setModalVisible] = useState(false);
   const [checkPassword, setCheckPassword] = useState('');
+  const [checkBoxValue, setCheckBoxVlaue] = useState('직접입력');
 
   const emailId = useSelector((state) => state.necessaryUserInfo.emailId);
   const emailAddress = useSelector(
@@ -53,6 +57,14 @@ function NecessaryUserInfoScreen({ navigation }) {
     console.log(emailId, emailAddress, password);
     dispatch(initialize());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (checkBoxValue === '직접입력') {
+      dispatch(changeField({ key: 'emailAddress', value: null }));
+    } else {
+      dispatch(changeField({ key: 'emailAddress', value: checkBoxValue }));
+    }
+  }, [checkBoxValue]);
 
   return (
     <>
@@ -97,7 +109,12 @@ function NecessaryUserInfoScreen({ navigation }) {
                       setValue={onChange('emailAddress')}
                       placeholder="직접입력"
                       value={emailAddress}
-                      rightItem={<ChevronDownIcon />}
+                      editable={checkBoxValue === '직접입력'}
+                      rightItem={
+                        <TouchableOpacity onPress={() => setModalVisible(true)}>
+                          <ChevronDownIcon />
+                        </TouchableOpacity>
+                      }
                       warningMesseage="disable"
                     />
                   </View>
@@ -129,7 +146,13 @@ function NecessaryUserInfoScreen({ navigation }) {
           </AuthenticationSafeAreaViewContainer>
         </ScrollView>
       </KeyboardAvoidingView>
-
+      <SelectBoxContainer
+        isVisible={isModalVisible}
+        setVisible={setModalVisible}
+        items={['naver.com', 'hanmail.com', 'gmail.com', '직접입력']}
+        value={checkBoxValue}
+        setValue={setCheckBoxVlaue}
+      />
       <NextButton
         onPress={() => navigation.navigate('OptionalUserInfo')}
         isOk={emailId !== ''}
