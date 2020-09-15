@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
   Text,
   View,
@@ -35,6 +35,10 @@ function ConfirmPhoneNumberScreen({ navigation }) {
     (state) => state.confirmPhoneNumber.certificationNumber,
   );
 
+  const phoneNumberRef = useRef();
+  const certificationNumberRef = useRef();
+  const sendButtonRef = useRef();
+
   const dispatch = useDispatch();
 
   const onChange = (key) =>
@@ -68,6 +72,7 @@ function ConfirmPhoneNumberScreen({ navigation }) {
               <View>
                 {/* 로그인 Input 영역 */}
                 <StyledTextInput
+                  textInputRef={phoneNumberRef}
                   label={'휴대폰 번호'}
                   setValue={onChange('phoneNumber')}
                   placeholder="01012345678"
@@ -75,9 +80,18 @@ function ConfirmPhoneNumberScreen({ navigation }) {
                   warningMesseage={phoneNumberWarningMessage}
                   keyboardType="number-pad"
                   maxLength={11}
+                  onSubmitEditing={() => {
+                    Alert.alert('인증번호 전송 완료');
+                    certificationNumberRef.current.focus();
+                  }}
                   rightItem={
                     <TouchableOpacity
-                      onPress={() => Alert.alert('인증번호 전송 완료')}>
+                      style={{ padding: 8 }}
+                      ref={sendButtonRef}
+                      onPress={() => {
+                        Alert.alert('인증번호 전송 완료');
+                        certificationNumberRef.current.focus();
+                      }}>
                       <View>
                         <Text>인증번호 전송</Text>
                       </View>
@@ -86,6 +100,7 @@ function ConfirmPhoneNumberScreen({ navigation }) {
                 />
 
                 <StyledTextInput
+                  textInputRef={certificationNumberRef}
                   label={'인증번호'}
                   setValue={onChange('certificationNumber')}
                   placeholder="012345"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
 import { useTheme } from '@react-navigation/native';
 import { View, TouchableOpacity, Text, Keyboard } from 'react-native';
@@ -36,10 +36,12 @@ const TextInputContainer = ({
   marginBottom = 15,
   returnKeyType = 'done',
   editable = true,
+  textInputRef = null,
   onSubmitEditing = () => Keyboard.dismiss(),
 }) => {
   const { colors } = useTheme();
   const [focused, setFocused] = useState(false);
+
   return (
     <View style={{ marginBottom: marginBottom }}>
       {label && <Text style={{ paddingVertical: 5 }}>{label}</Text>}
@@ -49,6 +51,7 @@ const TextInputContainer = ({
         lineColor={focused ? colors.secondary : colors.gray}>
         {leftItem}
         <StyledTextInput
+          ref={textInputRef}
           textColor={focused ? colors.secondary : colors.black}
           placeholder={placeholder}
           value={value}

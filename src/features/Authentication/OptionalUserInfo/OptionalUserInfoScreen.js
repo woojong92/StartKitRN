@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   View,
   ScrollView,
@@ -72,6 +72,10 @@ function OptionalUserInfoScreen({ navigation }) {
   const birth = useSelector((state) => state.optionalUserInfo.birth);
   const gender = useSelector((state) => state.optionalUserInfo.gender);
 
+  const userNameRef = useRef();
+  const birthRef = useRef();
+  const genderRef = useRef();
+
   const onChange = (key) =>
     useCallback(
       (text) => {
@@ -105,6 +109,8 @@ function OptionalUserInfoScreen({ navigation }) {
 
               <View>
                 <StyledTextInput
+                  textInputRef={userNameRef}
+                  onSubmitEditing={() => birthRef.current.focus()}
                   label="이름"
                   setValue={onChange('userName')}
                   placeholder="웨이크업"
@@ -119,6 +125,8 @@ function OptionalUserInfoScreen({ navigation }) {
                       alignItems: 'center',
                     }}>
                     <StyledTextInput
+                      textInputRef={birthRef}
+                      onSubmitEditing={() => genderRef.current.focus()}
                       marginBottom={0}
                       style={{ width: 100 }}
                       setValue={onChange('birth')}
@@ -130,6 +138,8 @@ function OptionalUserInfoScreen({ navigation }) {
                     />
                     <Diver />
                     <StyledTextInput
+                      textInputRef={genderRef}
+                      //  onSubmitEditing={() => emailAddressRef.current.focus()}
                       marginBottom={0}
                       style={{ width: 30 }}
                       setValue={onChange('gender')}
