@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Theme from '../../../theme';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 ThemePlaceItem.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.object.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
-export default function ThemePlaceItem({ data }) {
+export default function ThemePlaceItem({ data, onPress }) {
   const { name } = data;
   return (
     <View>
@@ -22,16 +24,18 @@ export default function ThemePlaceItem({ data }) {
           borderRadius: 47,
         }}
       />
-      <Text
-        style={{
-          width: 95,
-          marginTop: 11,
-          textAlign: 'center',
-          fontSize: 11,
-          fontWeight: 'bold',
-        }}>
-        {name}
-      </Text>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <Text
+          style={{
+            width: 95,
+            marginTop: 11,
+            textAlign: 'center',
+            fontSize: 11,
+            fontWeight: 'bold',
+          }}>
+          {name}
+        </Text>
+      </TouchableWithoutFeedback>
     </View>
   );
 }

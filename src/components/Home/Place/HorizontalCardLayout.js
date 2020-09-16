@@ -9,6 +9,7 @@ import RecommendItem from './RecommendItem';
 
 ThemePlaceView.propTypes = {
   data: PropTypes.array.isRequired,
+  navigation: PropTypes.object,
 };
 LocationView.propTypes = {
   data: PropTypes.array.isRequired,
@@ -19,7 +20,7 @@ RecommendView.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
-export function ThemePlaceView({ data }) {
+export function ThemePlaceView({ data, navigation }) {
   return (
     <View style={{ paddingLeft: 22 }}>
       <View style={{ marginTop: 33, marginBottom: 19 }}>
@@ -30,7 +31,17 @@ export function ThemePlaceView({ data }) {
         horizontal={true}
         showsHorizontalScrollIndicator={false}>
         {data.map((item, i) => {
-          return <ThemePlaceItem key={i} data={item} />;
+          return (
+            <ThemePlaceItem
+              key={i}
+              data={item}
+              onPress={() =>
+                navigation.navigate('PlaceByTheme', {
+                  theme: item.name,
+                })
+              }
+            />
+          );
         })}
       </ScrollView>
     </View>

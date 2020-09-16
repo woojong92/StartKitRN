@@ -44,6 +44,11 @@ PhoneIcon.propTypes = {
   color: PropTypes.string,
 };
 
+BackIcon.propTypes = {
+  size: PropTypes.number,
+  color: PropTypes.string,
+};
+
 export function EyeIcon({ size = 25, color = colors.secondary }) {
   return <Ionicons name="eye" size={size} color={color} />;
 }
@@ -78,4 +83,8 @@ export function TimeIcon({ size = 25, color = colors.primary }) {
 
 export function PhoneIcon({ size = 25, color = colors.primary }) {
   return <SimpleLineIcons name="phone" size={size} color={color} />;
+}
+
+export function BackIcon({ size = 25, color = colors.black }) {
+  return <Ionicons name="chevron-back-outline" size={size} color={color} />;
 }

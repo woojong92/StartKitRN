@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Image,
+  TouchableWithoutFeedback,
+  SafeAreaView,
+} from 'react-native';
 import Theme from '../../theme';
 import { HomeHeaderIcon } from './OutsideStoreLayout';
 import PropTypes from 'prop-types';
-import { DrawerActions } from '@react-navigation/native';
 
 HomeHeader.propTypes = {
   navigation: PropTypes.object,
@@ -11,7 +15,7 @@ HomeHeader.propTypes = {
 
 export default function HomeHeader({ navigation }) {
   return (
-    <>
+    <SafeAreaView>
       <View
         style={{
           backgroundColor: Theme.colors.white,
@@ -37,7 +41,7 @@ export default function HomeHeader({ navigation }) {
           />
           <TouchableWithoutFeedback
             hitSlop={{ left: 7, right: 7, bottom: 7, top: 7 }}
-            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            onPress={() => navigation.openDrawer()}>
             {/* onPress={() => navigation.push('Drawer')}> */}
             <HomeHeaderIcon
               source={require('../../assets/Home/icn_wifi_color.png')}
@@ -45,6 +49,6 @@ export default function HomeHeader({ navigation }) {
           </TouchableWithoutFeedback>
         </View>
       </View>
-    </>
+    </SafeAreaView>
   );
 }

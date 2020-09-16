@@ -17,6 +17,7 @@ import OptionalUserInfoScreen from './features/Authentication/OptionalUserInfo';
 import NecessaryUserInfoScreen from './features/Authentication/NecessaryUserInfo';
 
 import HomeScreen from './features/Home';
+import PlaceByThemeScreen from './features/Place/PlaceByTheme';
 import DrawerContent from './components/Home/DrawerContent';
 
 const Stack = createStackNavigator();
@@ -72,11 +73,21 @@ function StackNavigator() {
           />
         </>
       ) : (
-        <Stack.Screen
-          name="Drawer"
-          component={DrawerNavigator}
-          options={{ headerShown: false }}
-        />
+        <>
+          <Stack.Screen
+            name="Drawer"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PlaceByTheme"
+            component={PlaceByThemeScreen}
+            // eslint-disable-next-line react/display-name
+            options={{
+              headerShown: false,
+            }}
+          />
+        </>
       )}
     </Stack.Navigator>
   );
