@@ -106,7 +106,7 @@ export default function HomeScreen({ navigation }) {
           />
           <LocationView data={HotPlaceData} title={'요즘 뜨는 장소'} />
           <RecommendView data={HotPlaceData} />
-          <ThemePlaceView data={HotPlaceData} />
+          <ThemePlaceView data={HotPlaceData} navigation={navigation} />
           <EventView data={AdvertiseData} />
         </ScrollView>
       </SafeAreaView>
