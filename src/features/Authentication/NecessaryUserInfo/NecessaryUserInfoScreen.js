@@ -21,22 +21,21 @@ const { width: windowWidth } = Dimensions.get('window');
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeField, initialize } from './necessaryUserInfoSlice';
-
-import {
-  EyeIcon,
-  EyeOffIcon,
-  ChevronDownIcon,
-} from '../../../components/icons';
+import { ChevronDownIcon } from '../../../components/icons';
 import SelectBoxContainer from '../../../components/SelectBox';
+import SecureToggleButton from '../../../components/Authentication/SecureToggleButton';
 
 NecessaryUserInfoScreen.propTypes = {
   navigation: PropTypes.object,
 };
 
 function NecessaryUserInfoScreen({ navigation }) {
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isSelectBoxVisible, setSelectBoxVisible] = useState(false); //
   const [checkPassword, setCheckPassword] = useState('');
-  const [checkBoxValue, setCheckBoxVlaue] = useState('직접입력');
+  const [currentSelectBoxValue, setCurrentSelectBoxValue] = useState(
+    '직접입력',
+  );
+  const [isSecure, setSecure] = useState(true);
 
   const emailId = useSelector((state) => state.necessaryUserInfo.emailId);
   const emailAddress = useSelector(
@@ -59,17 +58,18 @@ function NecessaryUserInfoScreen({ navigation }) {
     );
 
   useEffect(() => {
-    console.log(emailId, emailAddress, password);
     dispatch(initialize());
   }, [dispatch]);
 
   useEffect(() => {
-    if (checkBoxValue === '직접입력') {
+    if (currentSelectBoxValue === '직접입력') {
       dispatch(changeField({ key: 'emailAddress', value: null }));
     } else {
-      dispatch(changeField({ key: 'emailAddress', value: checkBoxValue }));
+      dispatch(
+        changeField({ key: 'emailAddress', value: currentSelectBoxValue }),
+      );
     }
-  }, [checkBoxValue]);
+  }, [currentSelectBoxValue]);
 
   return (
     <>
@@ -105,7 +105,7 @@ function NecessaryUserInfoScreen({ navigation }) {
                       style={{ width: windowWidth / 2 - 60 }}
                       setValue={onChange('emailId')}
                       onSubmitEditing={() => {
-                        if (checkBoxValue === '직접입력') {
+                        if (currentSelectBoxValue === '직접입력') {
                           emailAddressRef.current.focus();
                         } else {
                           passwordRef.current.focus();
@@ -124,9 +124,10 @@ function NecessaryUserInfoScreen({ navigation }) {
                       setValue={onChange('emailAddress')}
                       placeholder="직접입력"
                       value={emailAddress}
-                      editable={checkBoxValue === '직접입력'}
+                      editable={currentSelectBoxValue === '직접입력'}
                       rightItem={
-                        <TouchableOpacity onPress={() => setModalVisible(true)}>
+                        <TouchableOpacity
+                          onPress={() => setSelectBoxVisible(true)}>
                           <ChevronDownIcon />
                         </TouchableOpacity>
                       }
@@ -144,10 +145,12 @@ function NecessaryUserInfoScreen({ navigation }) {
                   onSubmitEditing={() => checkPasswordRef.current.focus()}
                   setValue={onChange('password')}
                   placeholder=""
-                  secureTextEntry={true}
+                  secureTextEntry={isSecure}
                   value={password}
                   textContentType={'password'}
-                  rightItem={<EyeOffIcon />}
+                  rightItem={
+                    <SecureToggleButton value={isSecure} setValue={setSecure} />
+                  }
                 />
 
                 <StyledTextInput
@@ -165,11 +168,11 @@ function NecessaryUserInfoScreen({ navigation }) {
         </ScrollView>
       </KeyboardAvoidingView>
       <SelectBoxContainer
-        isVisible={isModalVisible}
-        setVisible={setModalVisible}
+        isVisible={isSelectBoxVisible}
+        setVisible={setSelectBoxVisible}
         items={['naver.com', 'hanmail.com', 'gmail.com', '직접입력']}
-        value={checkBoxValue}
-        setValue={setCheckBoxVlaue}
+        value={currentSelectBoxValue}
+        setValue={setCurrentSelectBoxValue}
       />
       <NextButton
         onPress={() => navigation.navigate('OptionalUserInfo')}

@@ -24,8 +24,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { initialize, changeField } from './emailLogInSlice';
 import { setAccessToken } from '../authenticationSlice';
 
-import { EyeIcon, EyeOffIcon } from '../../../components/icons';
-import { useTheme } from '@react-navigation/native';
+import SecureToggleButton from '../../../components/Authentication/SecureToggleButton';
 
 EmailLogInScreen.propTypes = {
   navigation: PropTypes.object,
@@ -34,6 +33,7 @@ EmailLogInScreen.propTypes = {
 function EmailLogInScreen({ navigation }) {
   const [emailWarningMessage, setEmailWarningMessage] = useState('');
   const [passwordWarningMessage, setPasswordWarningMessage] = useState('');
+  const [isSecure, setSecure] = useState(true);
 
   const emailTextInputRef = useRef();
   const passwordTextInputRef = useRef();
@@ -52,7 +52,9 @@ function EmailLogInScreen({ navigation }) {
     );
 
   useEffect(() => {
-    dispatch(initialize());
+    return () => {
+      dispatch(initialize());
+    };
   }, []);
 
   return (
@@ -83,7 +85,7 @@ function EmailLogInScreen({ navigation }) {
                     key={'email'}
                     label={'이메일'}
                     setValue={onChange('email')}
-                    placeholder="abcde@wakeup.com"
+                    placeholder="abc@wakeup.com"
                     value={email}
                     warningMesseage={emailWarningMessage}
                   />
@@ -95,12 +97,18 @@ function EmailLogInScreen({ navigation }) {
                     placeholder="비밀번호를 입력해주세요."
                     setValue={onChange('password')}
                     value={password}
-                    secureTextEntry={true}
+                    secureTextEntry={isSecure}
                     warningMesseage={passwordWarningMessage}
-                    rightItem={<EyeOffIcon />}
+                    rightItem={
+                      <SecureToggleButton
+                        value={isSecure}
+                        setValue={setSecure}
+                      />
+                    }
                   />
                 </View>
 
+                {/* 정리하기 */}
                 <View
                   style={{
                     flexDirection: 'row',
@@ -114,7 +122,6 @@ function EmailLogInScreen({ navigation }) {
                     <Text
                       style={{
                         padding: 10,
-                        marginRight: 5,
                         fontSize: 12,
                       }}>
                       이메일 회원가입
@@ -126,7 +133,6 @@ function EmailLogInScreen({ navigation }) {
                     <Text
                       style={{
                         padding: 10,
-                        marginLeft: 5,
                         fontSize: 12,
                       }}>
                       비밀번호 찾기
