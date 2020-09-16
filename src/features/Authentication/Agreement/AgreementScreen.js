@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import {
   AuthenticationLayout,
@@ -12,7 +12,7 @@ import CheckBoxItem from './CheckBoxItem';
 import Theme from '../../../theme';
 import styled from '@emotion/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeField } from './agreementSlice';
+import { changeField, initialize } from './agreementSlice';
 
 const Diver = styled.View`
   width: 100%;
@@ -27,8 +27,7 @@ AgreementScreen.propTypes = {
 };
 
 export default function AgreementScreen({ navigation }) {
-  const [totalToggleCheckBox, setTotalToggleCheckBox] = useState(false);
-
+  const allAgreement = useSelector((state) => state.agreement.allAgreement);
   const useAndPrivacyAgreement = useSelector(
     (state) => state.agreement.useAndPrivacyAgreement,
   );
@@ -49,12 +48,11 @@ export default function AgreementScreen({ navigation }) {
       [dispatch],
     );
 
-  const handleTotalToggleCheckBox = (newValue) => {
-    setTotalToggleCheckBox(newValue);
-    dispatch(changeField({ key: 'useAndPrivacyAgreement', value: newValue }));
-    dispatch(changeField({ key: 'locationAgreement', value: newValue }));
-    dispatch(changeField({ key: 'marketingAgreement', value: newValue }));
-  };
+  useEffect(() => {
+    return () => {
+      dispatch(initialize());
+    };
+  }, []);
 
   return (
     <>
@@ -71,8 +69,8 @@ export default function AgreementScreen({ navigation }) {
             <View style={{}}>
               <View>
                 <CheckBoxItem
-                  value={totalToggleCheckBox}
-                  setValue={handleTotalToggleCheckBox}
+                  value={allAgreement}
+                  setValue={onChange('allAgreement')}
                   fontSize={18}>
                   약관 전체동의
                 </CheckBoxItem>
