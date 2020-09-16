@@ -13,7 +13,7 @@ PlaceByThemeScreen.propTypes = {
   route: PropTypes.object.isRequired,
   navigation: PropTypes.object,
 };
-export default function PlaceByThemeScreen({ route }) {
+export default function PlaceByThemeScreen({ route, navigation }) {
   // 임시 ThemeeData
   const initialThemeeData = [
     {
@@ -46,7 +46,7 @@ export default function PlaceByThemeScreen({ route }) {
     },
   ];
 
-  const { theme, navigation } = route.params;
+  const { theme } = route.params;
   const [ThemeeData, setThemeeData] = useState(initialThemeeData);
   const [isCategoryModalVisible, setCategoryModalVisible] = useState(false);
   const [isSortModalVisible, setSortModalVisible] = useState(false);
