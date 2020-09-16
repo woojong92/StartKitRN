@@ -18,7 +18,7 @@ import NecessaryUserInfoScreen from './features/Authentication/NecessaryUserInfo
 
 import HomeScreen from './features/Home';
 import PlaceByThemeScreen from './features/Place/PlaceByTheme';
-import DrawerContent from './components/Home/DrawerContent';
+import DrawerContent from './features/Drawer';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -102,13 +102,15 @@ function StackNavigator() {
 }
 
 function DrawerNavigator() {
+  const dimentions = useWindowDimensions();
+
   return (
     <Drawer.Navigator
       screenOptions={{
         swipeEnabled: false,
       }}
       drawerStyle={{
-        width: 116,
+        width: dimentions.width * 0.8,
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       drawerPosition={'right'}>
@@ -118,7 +120,7 @@ function DrawerNavigator() {
 }
 
 import Theme from './theme';
-import { Platform } from 'react-native';
+import { Platform, useWindowDimensions } from 'react-native';
 
 function App() {
   return (
