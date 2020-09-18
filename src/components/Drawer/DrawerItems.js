@@ -3,6 +3,7 @@ import styled from '@emotion/native';
 import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../features/Authentication/authenticationSlice';
+import PropTypes from 'prop-types';
 
 const DrawerItemsContainer = styled.View`
   padding: 20px;
@@ -18,12 +19,17 @@ const DrawerItemText = styled.Text`
   font-size: 18px;
   font-weight: bold;
 `;
+
+DrawerItems.propTypes = {
+  navigation: PropTypes.object,
+};
+
 export default function DrawerItems({ navigation }) {
   const dispatch = useDispatch();
 
   return (
     <DrawerItemsContainer>
-      <DrawerItem onPress={() => Alert.alert('마이데이터')}>
+      <DrawerItem onPress={() => navigation.navigate('MyData')}>
         <DrawerItemText>마이데이터</DrawerItemText>
       </DrawerItem>
       <DrawerItem onPress={() => Alert.alert('이용자참여')}>

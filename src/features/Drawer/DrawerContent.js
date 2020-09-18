@@ -33,7 +33,7 @@ export default function DrawerContent({ navigation }) {
 
         {/* DrawerItmes */}
         <ScrollView>
-          <DrawerItems />
+          <DrawerItems navigation={navigation} />
         </ScrollView>
       </DrawerContentContainer>
     </>

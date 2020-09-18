@@ -19,11 +19,12 @@ import NecessaryUserInfoScreen from './features/Authentication/NecessaryUserInfo
 import HomeScreen from './features/Home';
 import PlaceByThemeScreen from './features/Place/PlaceByTheme';
 import DrawerContent from './features/Drawer';
+import MyDataScreen from './features/MyData';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function StackNavigator() {
+function RootNavigator() {
   const accessToken = useSelector((state) => state.authentication.accessToken);
   return (
     <Stack.Navigator
@@ -93,14 +94,6 @@ function StackNavigator() {
   );
 }
 
-{
-  /* <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false, gestureEnabled: true }}
-      /> */
-}
-
 function DrawerNavigator() {
   const dimentions = useWindowDimensions();
 
@@ -114,7 +107,8 @@ function DrawerNavigator() {
       }}
       drawerContent={(props) => <DrawerContent {...props} />}
       drawerPosition={'right'}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="MyData" component={MyDataScreen} />
     </Drawer.Navigator>
   );
 }
@@ -126,8 +120,7 @@ function App() {
   return (
     <Provider store={store}>
       <NavigationContainer theme={Theme}>
-        <StackNavigator />
-        {/* <DrawerNavigator /> */}
+        <RootNavigator />
       </NavigationContainer>
     </Provider>
   );
