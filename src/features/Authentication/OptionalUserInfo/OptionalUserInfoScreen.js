@@ -25,6 +25,7 @@ OptionalUserInfoScreen.propTypes = {
 import styled from '@emotion/native';
 import { initialize, changeField } from './optionalUserInfoSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { setAccessToken } from '../authenticationSlice';
 
 const DotGroup = styled.View`
   flex-direction: row;
@@ -159,7 +160,7 @@ function OptionalUserInfoScreen({ navigation }) {
       </KeyboardAvoidingView>
 
       <NextButton
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => dispatch(setAccessToken())}
         isOk={userName !== '' && birth !== '' && gender !== ''}
       />
     </>
