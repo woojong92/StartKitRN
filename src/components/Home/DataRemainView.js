@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import GradientItem from './GradientItem';
 import { useTheme } from '@react-navigation/native';
+import { ChevronForwardIcon } from '../icons';
 
 export default function DataRemainView() {
   const { colors } = useTheme();
@@ -15,7 +16,7 @@ export default function DataRemainView() {
       }}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={{ marginRight: 4, fontWeight: 'bold' }}>B요금제</Text>
-        <Image source={require('../../assets/Home/icn_wifi_color.png')} />
+        <ChevronForwardIcon size={18} />
       </View>
       <View>
         <View

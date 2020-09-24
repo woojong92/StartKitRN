@@ -6,6 +6,7 @@ import ThemePlaceItem from './ThemePlaceItem';
 import { HomeSectionSubTitle, HomeSectionTitle } from '../OutsideStoreLayout';
 import LocationItem from './LocationItem';
 import RecommendItem from './RecommendItem';
+import { LocationPinIcon } from '../../icons';
 
 ThemePlaceView.propTypes = {
   data: PropTypes.array.isRequired,
@@ -73,14 +74,17 @@ export function LocationView({ data, title, location }) {
         <HomeSectionTitle>{title}</HomeSectionTitle>
         {location && (
           <View style={{ flexDirection: 'row', marginTop: 10 }}>
-            <Image
+            {/* <Image
               source={require('../../../assets/Home/icn_wifi_color.png')}
               style={{
                 width: 7,
                 height: 10,
                 marginRight: 5,
               }}
-            />
+            /> */}
+            <View style={{ marginRight: 5 }}>
+              <LocationPinIcon size={10} />
+            </View>
             <HomeSectionSubTitle>{location}</HomeSectionSubTitle>
           </View>
         )}

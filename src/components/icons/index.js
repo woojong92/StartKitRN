@@ -26,6 +26,9 @@ PhoneIcon.propTypes = IconPropTypes;
 BackIcon.propTypes = IconPropTypes;
 CloseIcon.propTypes = IconPropTypes;
 CouponIcon.propTypes = IconPropTypes;
+MenuIcon.propTypes = IconPropTypes;
+MapIcon.propTypes = IconPropTypes;
+WifiIcon.propTypes = IconPropTypes;
 
 export function EyeIcon({ size = 25, color = colors.secondary }) {
   return <Ionicons name="eye" size={size} color={color} />;
@@ -73,6 +76,22 @@ export function CloseIcon({ size = 25, color = colors.black }) {
 
 export function CouponIcon({ size = 25, color = colors.black }) {
   return <FontAwesomeIcons name="ticket" size={size} color={color} />;
+}
+
+export function MenuIcon({ size = 25, color = colors.black }) {
+  return <SimpleLineIcons name="menu" size={size} color={color} />;
+}
+
+export function SearchIcon({ size = 25, color = colors.black }) {
+  return <Ionicons name="search-outline" size={size} color={color} />;
+}
+
+export function MapIcon({ size = 25, color = colors.black }) {
+  return <Ionicons name="map-outline" size={size} color={color} />;
+}
+
+export function WifiIcon({ size = 25, color = colors.black }) {
+  return <Ionicons name="wifi-outline" size={size} color={color} />;
 }
 
 export function PointIcon({ size = 25, color = colors.black }) {
