@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
+import { ChevronForwardIcon } from '../icons';
 
 WelcomewView.propTypes = {
   username: PropTypes.string.isRequired,
@@ -33,10 +34,7 @@ export default function WelcomewView({ username }) {
           }}>
           지금 바로 확인하기
         </Text>
-        <Image
-          source={require('../../assets/Home/icn_wifi_color.png')}
-          style={{ width: 14, height: 14 }}
-        />
+        <ChevronForwardIcon size={14} />
       </View>
     </View>
   );

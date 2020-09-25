@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
 import styled from '@emotion/native';
 import Theme from '../../../theme';
+import { HeartIcon } from '../../icons';
 
 LocationItem.propTypes = {
   data: PropTypes.object,
@@ -49,14 +50,15 @@ export default function LocationItem({ data }) {
 
           <WhiteText size={'6'}>{distance}</WhiteText>
         </View>
-        <Image
+        {/* <Image
           source={require('../../../assets/Home/icn_wifi_color.png')}
           style={{
             width: 15,
             height: 13,
             marginRight: 5,
           }}
-        />
+        /> */}
+        <HeartIcon size={18} />
       </View>
     </View>
   );

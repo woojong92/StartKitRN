@@ -1,9 +1,7 @@
 import styled from '@emotion/native';
 import Theme from '../../theme';
 
-export const HomeHeaderIcon = styled.Image`
-  width: 22;
-  height: 22;
+export const HomeHeaderIcon = styled.View`
   margin-left: 15;
 `;
 

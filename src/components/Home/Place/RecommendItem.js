@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
 import styled from '@emotion/native';
 import Theme from '../../../theme';
+import { HeartIcon } from '../../icons';
 
 RecommendItem.propTypes = {
   data: PropTypes.object,
@@ -49,14 +50,15 @@ export default function RecommendItem({ data }) {
 
           <WhiteText size={'7'}>{distance}</WhiteText>
         </View>
-        <Image
+        {/* <Image
           source={require('../../../assets/Home/icn_wifi_color.png')}
           style={{
             width: 19,
             height: 17,
             marginRight: 5,
           }}
-        />
+        /> */}
+        <HeartIcon size={22} />
       </View>
     </View>
   );
