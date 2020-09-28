@@ -3,12 +3,12 @@ import { Text, View, TouchableOpacity, Button, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { GoogleSignin } from '@react-native-community/google-signin';
-import {
-  onFacebookButtonPress,
-  onGoogleButtonPress,
-  onKakaoButtonPress,
-  onNaverButtonPress,
-} from '~/services/Authentication';
+// import {
+//   onFacebookButtonPress,
+//   onGoogleButtonPress,
+//   onKakaoButtonPress,
+//   onNaverButtonPress,
+// } from '~/services/Authentication';
 
 import LoginButton from '~/components/Authentication/LoginButton';
 

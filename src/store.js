@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import authenticationReducer from './features/Authentication/authenticationSlice';
 import logInReducer from './features/Authentication/LogIn/logInSlice';
 import emailLogInReducer from './features/Authentication/EmailLogIn/emailLogInSlice';
@@ -6,6 +6,8 @@ import necessaryUserInfoReducer from './features/Authentication/NecessaryUserInf
 import optionalUserInfoReducer from './features/Authentication/OptionalUserInfo/optionalUserInfoSlice';
 import confirmPhoneNumberReducer from './features/Authentication/ConfirmPhoneNumber/confirmPhoneNumberSlice';
 import agreementReducer from './features/Authentication/Agreement/agreementSlice';
+
+const middlewares = getDefaultMiddleware();
 
 export default configureStore({
   reducer: {
@@ -17,6 +19,6 @@ export default configureStore({
     confirmPhoneNumber: confirmPhoneNumberReducer,
     agreement: agreementReducer,
   },
-  middleware: [],
+  middleware: middlewares,
   enhancers: [],
 });

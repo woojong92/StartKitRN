@@ -1,9 +1,10 @@
 import {
   createSlice,
   createEntityAdapter,
-  // createAsyncThunk,
+  createAsyncThunk,
   // createSelector,
 } from '@reduxjs/toolkit';
+import logInAPI from '../../../services/Authentication/LogInAPI';
 // import LoginAPI from '../../../services/loginAPI';
 // import { normalize, schema } from 'normalizr'
 
@@ -14,9 +15,25 @@ import {
 
 export const emailLogInAdapter = createEntityAdapter();
 const initialState = emailLogInAdapter.getInitialState({
+  loading: 'idle',
+  currentRequestId: undefined,
+  error: null,
+  entities: [],
   email: '',
   password: '',
 });
+
+export const fetchEmailLogIn = createAsyncThunk(
+  'emailLogIn/fetchEmailLogIn',
+  async (params, { getState, requestId }) => {
+    const { loading, currentRequestId } = getState().emailLogIn;
+    if (loading !== 'pending' || currentRequestId !== requestId) {
+      return;
+    }
+    const response = await logInAPI(params);
+    return response.data;
+  },
+);
 
 export const emailLogInSlice = createSlice({
   name: 'emailLogIn',
@@ -34,9 +51,34 @@ export const emailLogInSlice = createSlice({
       }
     },
   },
+  extraReducers: {
+    [fetchEmailLogIn.pending]: (state, action) => {
+      if (state.loading === 'idle') {
+        state.loading = 'pending';
+        state.currentRequestId = action.meta.requestId;
+      }
+    },
+    [fetchEmailLogIn.fulfilled]: (state, action) => {
+      const { requestId } = action.meta;
+      if (state.loading === 'pending' && state.currentRequestId === requestId) {
+        state.loading = 'idle';
+        state.entities.push(action.payload);
+        state.currentRequestId = undefined;
+      }
+    },
+    [fetchEmailLogIn.rejected]: (state, action) => {
+      const { requestId } = action.meta;
+      if (state.loading === 'pending' && state.currentRequestId === requestId) {
+        state.loading = 'idle';
+        state.error = action.error;
+        state.currentRequestId = undefined;
+      }
+    },
+  },
 });
 
 // 안되는 이유를 모르겠음... 나중에 적용
+// 미들웨어 적용을 안해서..
 // export const {
 //   email: emailFromEmailLogIn,
 //   password: passwordFromEmailLogIn,
