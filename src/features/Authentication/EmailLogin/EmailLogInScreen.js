@@ -21,10 +21,13 @@ import StyledTextInput from '../../../components/Authentication/StyledTextInput'
 
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { initialize, changeField } from './emailLogInSlice';
+import { initialize, changeField, fetchEmailLogIn } from './emailLogInSlice';
 import { setAccessToken } from '../authenticationSlice';
+// import { changeField } from '../authenticationSlice';
 
 import SecureToggleButton from '../../../components/Authentication/SecureToggleButton';
+
+// import { logInAPI } from '../../../services/Authentication';
 
 EmailLogInScreen.propTypes = {
   navigation: PropTypes.object,
@@ -147,7 +150,24 @@ function EmailLogInScreen({ navigation }) {
 
       <NextButton
         style={{ position: 'absolute' }}
-        onPress={() => dispatch(setAccessToken())}
+        onPress={
+          () => {
+            dispatch(
+              fetchEmailLogIn({
+                userEmail: email,
+                userEmailType: 'user',
+                userPassword: password,
+                userSnsKey: null,
+              }),
+            );
+          }
+          // await logInAPI({
+          //   userEmail: 'test4@gmail.com',
+          //   userEmailType: 'user',
+          //   userPassword: '0694123',
+          //   userSnsKey: null,
+          // })
+        } // dispatch(setAccessToken()
         isOk={email !== '' && password != ''}
       />
     </>

@@ -16,13 +16,11 @@ const initialState = logInAdapter.getInitialState({
   loading: 'idle',
   currentRequestId: undefined,
   error: null,
-  SNSAccessToken: null,
-  SNSType: null,
-  SNSUuid: null,
-  SNSEmail: null,
-  SNSUserName: null,
-  SNSBirth: null,
-  SNSGender: null,
+
+  userEmail: null,
+  userEmailType: null,
+  userPassword: null,
+  userSnsKey: null,
 });
 
 const fetchSNSLogin = createAsyncThunk(
@@ -46,6 +44,29 @@ const fetchSNSLogin = createAsyncThunk(
       const respnse = await onFacebookButtonPress();
       return respnse.data;
     }
+  },
+);
+
+import logInAPI from './logInAPI';
+
+const fetchLogIn = createAsyncThunk(
+  'logIn/fetchLogIn',
+  async ({ getState, requestId }) => {
+    const {
+      loading,
+      currentRequestId,
+      // error,
+      userEmail,
+      userEmailType,
+      userPassword,
+      userSnsKey,
+    } = getState().logIn;
+    if (loading !== 'pending' || currentRequestId !== requestId) {
+      return;
+    }
+    const params = { userEmail, userEmailType, userPassword, userSnsKey };
+    const response = await logInAPI(params);
+    return response;
   },
 );
 
