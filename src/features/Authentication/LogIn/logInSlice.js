@@ -47,28 +47,28 @@ const fetchSNSLogin = createAsyncThunk(
   },
 );
 
-import logInAPI from './logInAPI';
+// import logInAPI from './logInAPI';
 
-const fetchLogIn = createAsyncThunk(
-  'logIn/fetchLogIn',
-  async ({ getState, requestId }) => {
-    const {
-      loading,
-      currentRequestId,
-      // error,
-      userEmail,
-      userEmailType,
-      userPassword,
-      userSnsKey,
-    } = getState().logIn;
-    if (loading !== 'pending' || currentRequestId !== requestId) {
-      return;
-    }
-    const params = { userEmail, userEmailType, userPassword, userSnsKey };
-    const response = await logInAPI(params);
-    return response;
-  },
-);
+// const fetchLogIn = createAsyncThunk(
+//   'logIn/fetchLogIn',
+//   async ({ getState, requestId }) => {
+//     const {
+//       loading,
+//       currentRequestId,
+//       // error,
+//       userEmail,
+//       userEmailType,
+//       userPassword,
+//       userSnsKey,
+//     } = getState().logIn;
+//     if (loading !== 'pending' || currentRequestId !== requestId) {
+//       return;
+//     }
+//     const params = { userEmail, userEmailType, userPassword, userSnsKey };
+//     const response = await logInAPI(params);
+//     return response;
+//   },
+// );
 
 export const logInSlice = createSlice({
   name: 'logIn',
